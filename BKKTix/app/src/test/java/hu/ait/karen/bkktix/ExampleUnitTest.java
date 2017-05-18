@@ -1,4 +1,4 @@
-package hu.ait.bkktix;
+package hu.ait.karen.bkktix;
 
 import org.junit.Test;
 
