@@ -1,4 +1,4 @@
-package hu.ait.karen.bkktix;
+package hu.ait.bkktix;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

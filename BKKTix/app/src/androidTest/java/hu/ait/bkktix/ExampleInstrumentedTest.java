@@ -1,4 +1,4 @@
-package hu.ait.karen.bkktix;
+package hu.ait.bkktix;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("hu.ait.karen.bkktix", appContext.getPackageName());
+        assertEquals("hu.ait.bkktix", appContext.getPackageName());
     }
 }
