@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +42,26 @@ public class MyTixFragment extends Fragment {
         // setting list adapter
         expListView.setAdapter(listAdapter);
         return rootView;
+
+//        // Listview on child click listener
+//        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+//
+//            @Override
+//            public boolean onChildClick(ExpandableListView parent, View v,
+//                                        int groupPosition, int childPosition, long id) {
+//                // TODO Auto-generated method stub
+//                Toast.makeText(MyTixFragment.this,
+//                        "meh",
+////                        listDataHeader.get(groupPosition)
+////                                + " : "
+////                                + listDataChild.get(
+////                                listDataHeader.get(groupPosition)).get(
+////                                childPosition),
+//                        Toast.LENGTH_SHORT).show();
+//
+//                return false;
+//            }
+//        });
     }
 
     private void prepareListData() {
@@ -81,4 +102,6 @@ public class MyTixFragment extends Fragment {
         listDataChild.put(listDataHeader.get(1), nowShowing);
         listDataChild.put(listDataHeader.get(2), comingSoon);
     }
+
+
 }
