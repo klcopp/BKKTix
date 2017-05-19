@@ -47,9 +47,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setUpUI() {
+
+        setUpNavigationView();
         setUpBottomNavigation();
         setUpToolbar();
-        setUpNavigationView();
+
+//        TODO set the toolbar title like: (?)
+//        toolbar.setTitle("esurance");
     }
 
     private void setUpBottomNavigation() {
