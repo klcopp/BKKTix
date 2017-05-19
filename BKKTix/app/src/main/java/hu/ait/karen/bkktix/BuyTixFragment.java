@@ -49,7 +49,6 @@ public class BuyTixFragment extends Fragment {
         });
 
 
-
         return rootView;
     }
 }

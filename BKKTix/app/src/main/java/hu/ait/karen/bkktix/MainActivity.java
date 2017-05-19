@@ -1,13 +1,23 @@
 package hu.ait.karen.bkktix;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -15,11 +25,13 @@ import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
 import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.data.TicketType;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private FragmentManager fragmentManager;
     private MyTixFragment myTixFragment;
     private MyTixExpandableListAdapter listAdapter;
+    private Toolbar toolbar;
 
 
     @Override
@@ -27,32 +39,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        setUpUI();
 
         fragmentManager = getSupportFragmentManager();
         showMyTixFragment();
         listAdapter = new MyTixExpandableListAdapter(getApplicationContext());
     }
 
+    private void setUpUI() {
+        setUpBottomNavigation();
+        setUpToolbar();
+        setUpNavigationView();
+    }
+
+    private void setUpBottomNavigation() {
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
     public MyTixExpandableListAdapter getListAdapter() {
         return listAdapter;
     }
-
-
-    //TODO Delete
-//    public void testAddTix() {
-//        addNewTicket(TicketType._20_MINUTES);
-//        addNewTicket(TicketType._20_MINUTES);
-//        addNewTicket(TicketType._120_MINUTES);
-//    }
-
 
     public void addNewTicket(TicketType ticketType) {
         Ticket newTicket = new Ticket(new Date(System.currentTimeMillis()));
         newTicket.setTicketType(ticketType);
         listAdapter.addChild(newTicket);
     }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -96,5 +110,46 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
+    private void setUpToolbar() {
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+
+    private void setUpNavigationView() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_add_city) {
+        } else if (id == R.id.nav_about) {
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
 }

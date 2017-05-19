@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:padding="15dp"
     android:background="#000000">
 
 
@@ -12,21 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
-        android:textSize="17dp"
+        android:textSize="20sp"
         android:textColor="#f9f93d"
 
-        android:text="header "
         />
 
     <TextView
         android:id="@+id/tvNumberTickets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textSize="17dp"
+        android:layout_alignParentEnd="true"
+        android:textSize="20sp"
         android:textColor="#f9f93d"
 
-        android:text="6"
         />
 
 </RelativeLayout>

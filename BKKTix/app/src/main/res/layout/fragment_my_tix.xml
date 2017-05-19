@@ -5,12 +5,6 @@
     android:background="@android:color/holo_blue_light"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Tix"
-        android:textSize="56dp" />
-
     <ExpandableListView
         android:id="@+id/lvExpandable"
         android:layout_width="match_parent"
