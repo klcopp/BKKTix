@@ -6,10 +6,15 @@
     android:background="#c42b2b"
     >
 
+    <!--TODO add actual validation once we have actual QRs -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="QR Reader"
         android:textSize="56dp" />
+    <hu.ait.karen.bkktix.camera.CameraSourcePreview
+        android:id="@+id/cameraSourcePreview"
+        android:layout_width="320dp"
+        android:layout_height="320dp" />
 
 </LinearLayout>

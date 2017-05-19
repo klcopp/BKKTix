@@ -3,11 +3,16 @@ package hu.ait.karen.bkktix;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.Date;
 
@@ -20,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private MyTixFragment myTixFragment;
     private MyTixExpandableListAdapter listAdapter;
+    private DrawerLayout drawerLayout;
 
 
     @Override
@@ -33,6 +39,32 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         showMyTixFragment();
         listAdapter = new MyTixExpandableListAdapter(getApplicationContext());
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        switch (menuItem.getItemId()) {
+                            case R.id.action_account:
+                                // view/edit account info
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                break;
+                            case R.id.action_tickethistory:
+                                // Expired ticket list
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                break;
+                            case R.id.action_help:
+                                // Help info
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                break;
+                        }
+
+                        return false;
+                    }
+                });
     }
 
     public MyTixExpandableListAdapter getListAdapter() {

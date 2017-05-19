@@ -7,4 +7,10 @@
     <string name="_20_min_tix">New 20 Minute Tickets</string>
     <string name="_60_min_tix">New 60 Minute Tickets</string>
     <string name="_120_min_tix">New 120 Minute Tickets</string>
+    <string name="title_activity_navdrawer">navdrawer</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
