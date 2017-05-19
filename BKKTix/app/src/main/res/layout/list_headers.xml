@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:padding="8dp"
     android:background="#000000">
 
 
+    <!--android:layout_width="fill_parent"-->
     <TextView
         android:id="@+id/tvListHeader"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingStart="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textSize="17dp"
-        android:textColor="#f9f93d" />
+        android:textColor="#f9f93d"
 
-</LinearLayout>
+        android:text="header "
+        />
+
+    <TextView
+        android:id="@+id/tvNumberTickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:paddingEnd="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textSize="17dp"
+        android:textColor="#f9f93d"
+
+        android:text="6"
+        />
+
+</RelativeLayout>

@@ -13,6 +13,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import hu.ait.karen.bkktix.R;
+import hu.ait.karen.bkktix.TicketType;
+import hu.ait.karen.bkktix.data.Ticket;
 
 /**
  * source: http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
@@ -20,21 +22,52 @@ import hu.ait.karen.bkktix.R;
 
 public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 
-    private Context _context;
-    private List<String> _listDataHeader; // header titles
-    // child data in format of header title, child title
-    private HashMap<String, List<String>> _listDataChild;
+    public enum HeaderType{
+        VALIDATED_TICKETS, _20_MINUTE_TICKETS, _60_MINUTE_TICKETS, _120_MINUTE_TICKETS
+    }
 
-    public MyTixExpandableListAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData) {
+    private Context _context;
+    private List<HeaderType> listDataHeaders;
+    private HashMap<HeaderType, List<Ticket>> listDataChildren;
+
+
+    public MyTixExpandableListAdapter(Context context) {
         this._context = context;
-        this._listDataHeader = listDataHeader;
-        this._listDataChild = listChildData;
+        listDataHeaders = new ArrayList<HeaderType>();
+        for (HeaderType headerType: HeaderType.values()
+             ) {
+            listDataHeaders.add(headerType);
+        }
+
+        listDataChildren = new HashMap<HeaderType, List<Ticket>>();
+        for (HeaderType header: listDataHeaders) {
+            listDataChildren.put(header, new ArrayList<Ticket>());
+        }
+
+    }
+
+    public void addChild(Ticket ticket){
+        TicketType type = ticket.getTicketType();
+        switch (type){
+            case _20_MINUTES:
+                listDataChildren.get(HeaderType._20_MINUTE_TICKETS).add(ticket);
+                break;
+            case _60_MINUTES:
+                listDataChildren.get(HeaderType._60_MINUTE_TICKETS).add(ticket);
+                break;
+            case _120_MINUTES:
+                listDataChildren.get(HeaderType._120_MINUTE_TICKETS).add(ticket);
+                break;
+        }
+    }
+
+    public void validateTicket(Ticket ticket){
+        // TODO move to validated section
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+        return this.listDataChildren.get(this.listDataHeaders.get(groupPosition))
                 .get(childPosititon);
     }
 
@@ -47,7 +80,8 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final String childText = (String) getChild(groupPosition, childPosition);
+//        //TODO !!!!
+//        final String childText = getChild(groupPosition, childPosition);
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -58,24 +92,25 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
 
-        txtListChild.setText(childText);
+        //TODO idontthinkthis'll work. get type, date purchased
+        txtListChild.setText(getChild(groupPosition, childPosition).toString());
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+        return this.listDataChildren.get(this.listDataHeaders.get(groupPosition))
                 .size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
+        return this.listDataHeaders.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-        return this._listDataHeader.size();
+        return this.listDataHeaders.size();
     }
 
     @Override
@@ -86,7 +121,28 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
+        String headerTitle;
+        HeaderType header = (HeaderType) getGroup(groupPosition);
+        switch (header){
+            case VALIDATED_TICKETS:
+                headerTitle = _context.getString(R.string.validated_tickets);
+                break;
+            case _20_MINUTE_TICKETS:
+                headerTitle = _context.getString(R.string._20_min_tix);
+                break;
+            case _60_MINUTE_TICKETS:
+                headerTitle = _context.getString(R.string._60_min_tix);
+                break;
+            case _120_MINUTE_TICKETS:
+                headerTitle = _context.getString(R.string._120_min_tix);
+                break;
+            default:
+                headerTitle = "idk";
+
+                //TODO STRING^
+        }
+
+//        String headerTitle = getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -97,6 +153,12 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.tvListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+
+        TextView tvNumberTickets = (TextView) convertView.findViewById(R.id.tvNumberTickets);
+        tvNumberTickets.setTypeface(null, Typeface.BOLD);
+
+        //TODO this needs to work someday
+//        tvNumberTickets.setText(getChildrenCount(groupPosition));
 
         return convertView;
     }
@@ -110,54 +172,5 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
-
-
-//
-//
-//    private void prepareListData() {
-//        listDataHeader = new ArrayList<String>();
-//        listDataChild = new HashMap<String, List<String>>();
-//
-//        // Adding child data
-//        listDataHeader.add("Top 250");
-//        listDataHeader.add("Now Showing");
-//        listDataHeader.add("Coming Soon..");
-//
-//        // Adding child data
-//        List<String> top250 = new ArrayList<String>();
-//        top250.add("The Shawshank Redemption");
-//        top250.add("The Godfather");
-//        top250.add("The Godfather: Part II");
-//        top250.add("Pulp Fiction");
-//        top250.add("The Good, the Bad and the Ugly");
-//        top250.add("The Dark Knight");
-//        top250.add("12 Angry Men");
-//
-//        List<String> nowShowing = new ArrayList<String>();
-//        nowShowing.add("The Conjuring");
-//        nowShowing.add("Despicable Me 2");
-//        nowShowing.add("Turbo");
-//        nowShowing.add("Grown Ups 2");
-//        nowShowing.add("Red 2");
-//        nowShowing.add("The Wolverine");
-//
-//        List<String> comingSoon = new ArrayList<String>();
-//        comingSoon.add("2 Guns");
-//        comingSoon.add("The Smurfs 2");
-//        comingSoon.add("The Spectacular Now");
-//        comingSoon.add("The Canyons");
-//        comingSoon.add("Europa Report");
-//
-//        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-//        listDataChild.put(listDataHeader.get(1), nowShowing);
-//        listDataChild.put(listDataHeader.get(2), comingSoon);
-//    }
-
-//    In MainActivity, right before setAdapter??:
-//    listAdapter = new MyTixExpandableListAdapter(this.getContext(), listDataHeader, listDataChild);
-
-
-
-
 
 }

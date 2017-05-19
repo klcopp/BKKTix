@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="validated_tickets">Validated Tickets</string>
+    <string name="_20_min_tix">New 20 Minute Tickets</string>
+    <string name="_60_min_tix">New 60 Minute Tickets</string>
+    <string name="_120_min_tix">New 120 Minute Tickets</string>
 </resources>
