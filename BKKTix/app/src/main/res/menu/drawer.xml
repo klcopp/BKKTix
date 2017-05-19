@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Account"
+        android:orderInCategory="100"
+        android:id="@+id/action_account"
+        android:icon="@android:drawable/ic_menu_add"/>
+    <item
+        android:title="Ticket History"
+        android:orderInCategory="101"
+        android:id="@+id/action_tickethistory"
+        android:icon="@android:drawable/ic_menu_info_details"/>
+    <item
+        android:title="Help"
+        android:orderInCategory="102"
+        android:id="@+id/action_help"
+        android:icon="@android:drawable/ic_menu_help"/>
+</menu>
