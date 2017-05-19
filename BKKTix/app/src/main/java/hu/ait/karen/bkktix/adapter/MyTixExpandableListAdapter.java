@@ -80,9 +80,6 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-//        //TODO !!!!
-//        final String childText = getChild(groupPosition, childPosition);
-
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -92,8 +89,11 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
 
-        //TODO idontthinkthis'll work. get type, date purchased
-        txtListChild.setText(getChild(groupPosition, childPosition).toString());
+        Ticket childName = (Ticket) getChild(groupPosition, childPosition);
+
+        //TODO change, and extract string resource
+        txtListChild.setText("Bought at: "+
+                childName.getDatePurchased().toString());
         return convertView;
     }
 
@@ -157,8 +157,8 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
         TextView tvNumberTickets = (TextView) convertView.findViewById(R.id.tvNumberTickets);
         tvNumberTickets.setTypeface(null, Typeface.BOLD);
 
-        //TODO this needs to work someday
-//        tvNumberTickets.setText(getChildrenCount(groupPosition));
+        tvNumberTickets.setText(""+ getChildrenCount(groupPosition));
+//        TODO ^STRING
 
         return convertView;
     }

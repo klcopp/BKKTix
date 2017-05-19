@@ -42,6 +42,11 @@ public class MyTixFragment extends Fragment {
         // setting list adapter
         expListView.setAdapter(listAdapter);
 
+        //TODO Delete:
+        addNewTicket(TicketType._20_MINUTES);
+        addNewTicket(TicketType._120_MINUTES);
+
+
         return rootView;
     }
 
