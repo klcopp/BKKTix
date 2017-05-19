@@ -3,8 +3,6 @@ package hu.ait.karen.bkktix.data;
 
 import java.util.Date;
 
-import hu.ait.karen.bkktix.TicketType;
-
 public class Ticket {
 
     private TicketType ticketType;

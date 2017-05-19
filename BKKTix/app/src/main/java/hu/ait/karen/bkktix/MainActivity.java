@@ -8,12 +8,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import java.util.Date;
+
+import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
+import hu.ait.karen.bkktix.data.Ticket;
+import hu.ait.karen.bkktix.data.TicketType;
 
 public class MainActivity extends AppCompatActivity {
 
-    FragmentManager fragmentManager;
-    MyTixFragment myTixFragment;
+    private FragmentManager fragmentManager;
+    private MyTixFragment myTixFragment;
+    private MyTixExpandableListAdapter listAdapter;
 
 
     @Override
@@ -26,14 +32,26 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         showMyTixFragment();
+        listAdapter = new MyTixExpandableListAdapter(getApplicationContext());
+    }
 
-//        myTixFragment = (MyTixFragment) fragmentManager.findFragmentByTag(MyTixFragment.TAG);
-
+    public MyTixExpandableListAdapter getListAdapter() {
+        return listAdapter;
     }
 
 
-    public void addNewTicket(TicketType ticketType){
-        myTixFragment.addNewTicket(ticketType);
+    //TODO Delete
+//    public void testAddTix() {
+//        addNewTicket(TicketType._20_MINUTES);
+//        addNewTicket(TicketType._20_MINUTES);
+//        addNewTicket(TicketType._120_MINUTES);
+//    }
+
+
+    public void addNewTicket(TicketType ticketType) {
+        Ticket newTicket = new Ticket(new Date(System.currentTimeMillis()));
+        newTicket.setTicketType(ticketType);
+        listAdapter.addChild(newTicket);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -59,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void showMyTixFragment() {
-        myTixFragment = new MyTixFragment();
+        if (myTixFragment == null) myTixFragment = new MyTixFragment();
         showFragment(myTixFragment, MyTixFragment.TAG);
     }
 

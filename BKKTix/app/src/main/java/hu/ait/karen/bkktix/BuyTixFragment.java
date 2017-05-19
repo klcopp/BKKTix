@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import hu.ait.karen.bkktix.data.TicketType;
+
 
 public class BuyTixFragment extends Fragment {
 
@@ -29,12 +31,22 @@ public class BuyTixFragment extends Fragment {
         });
 
         Button btnBuy60Min = (Button) rootView.findViewById(R.id.btnBuy60Min);
-
+        btnBuy60Min.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).addNewTicket(TicketType._60_MINUTES);
+            }
+        });
 
 
 
         Button btnBuy120Min = (Button) rootView.findViewById(R.id.btnBuy120Min);
-
+        btnBuy120Min.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).addNewTicket(TicketType._120_MINUTES);
+            }
+        });
 
 
 

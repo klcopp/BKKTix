@@ -1,6 +1,7 @@
 package hu.ait.karen.bkktix.adapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import hu.ait.karen.bkktix.R;
-import hu.ait.karen.bkktix.TicketType;
+import hu.ait.karen.bkktix.data.TicketType;
 import hu.ait.karen.bkktix.data.Ticket;
 
 /**
@@ -44,6 +45,14 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
             listDataChildren.put(header, new ArrayList<Ticket>());
         }
 
+//        //TODO delete. this works.
+//        listDataChildren.get(HeaderType._60_MINUTE_TICKETS).add(
+//                new Ticket(new Date(System.currentTimeMillis())));
+//
+//        //TODO delete. this works.
+//        addChild(new Ticket(new Date(System.currentTimeMillis()), TicketType._20_MINUTES));
+
+
     }
 
     public void addChild(Ticket ticket){
@@ -59,6 +68,7 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
                 listDataChildren.get(HeaderType._120_MINUTE_TICKETS).add(ticket);
                 break;
         }
+
     }
 
     public void validateTicket(Ticket ticket){
