@@ -17,7 +17,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- ToolBar -->
-    <style name="ToolBarStyle" parent="AppTheme">
+    <style name="ToolBarStyle" parent="AppTheme.NoActionBar">
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="actionMenuTextColor">@color/colorPrimaryDark</item>
