@@ -9,13 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-
 import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
-import hu.ait.karen.bkktix.data.Ticket;
-import hu.ait.karen.bkktix.data.TicketType;
+
 
 
 public class MyTixFragment extends Fragment {
@@ -38,21 +33,9 @@ public class MyTixFragment extends Fragment {
         expListView.setAdapter(listAdapter);
 
 
-////        TODO delete. this works.
-//        addNewTicket(TicketType._20_MINUTES);
-//        addNewTicket(TicketType._60_MINUTES);
-//        addNewTicket(TicketType._120_MINUTES);
-
 
         return rootView;
     }
 
-
-//    //TODO maybe delete
-//    public void addNewTicket(TicketType ticketType) {
-//        Ticket newTicket = new Ticket(new Date(System.currentTimeMillis()));
-//        newTicket.setTicketType(ticketType);
-//        listAdapter.addChild(newTicket);
-//    }
 
 }
