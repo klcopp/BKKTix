@@ -13,6 +13,28 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
+    MyTixFragment myTixFragment;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        fragmentManager = getSupportFragmentManager();
+        showMyTixFragment();
+
+//        myTixFragment = (MyTixFragment) fragmentManager.findFragmentByTag(MyTixFragment.TAG);
+
+    }
+
+
+    public void addNewTicket(TicketType ticketType){
+        myTixFragment.addNewTicket(ticketType);
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -35,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+
     private void showMyTixFragment() {
-        showFragment(new MyTixFragment(), MyTixFragment.TAG);
+        myTixFragment = new MyTixFragment();
+        showFragment(myTixFragment, MyTixFragment.TAG);
     }
 
     private void showBuyTixFragment() {
@@ -54,16 +78,5 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        fragmentManager = getSupportFragmentManager();
-        showMyTixFragment();
-    }
 
 }
