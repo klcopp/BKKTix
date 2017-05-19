@@ -11,6 +11,10 @@ public class Ticket {
     private Date datePurchased;
     private Date dateValidated;
 
+    public Ticket(Date datePurchased){
+        this.datePurchased = datePurchased;
+    }
+
     public Ticket(Date datePurchased, TicketType ticketType){
         this.datePurchased = datePurchased;
         this.ticketType = ticketType;
