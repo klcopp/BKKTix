@@ -4,16 +4,16 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="My Tix" />
+        android:title="@string/my_tix" />
 
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/plus"
-        android:title="Buy" />
+        android:title="@string/buy" />
 
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/qr_code_with_magnifying_glass"
-        android:title="Check" />
+        android:title="@string/check" />
 
 </menu>

@@ -52,10 +52,6 @@ public class MainActivity extends AppCompatActivity
         setUpToolbar();
         setUpNavigationView();
         setUpBottomNavigation();
-
-
-////        TODO set the toolbar title like: (?)
-//        toolbar.setTitle("esurance");
     }
 
     private void setUpBottomNavigation() {
@@ -99,21 +95,28 @@ public class MainActivity extends AppCompatActivity
     private void showMyTixFragment() {
         if (myTixFragment == null) myTixFragment = new MyTixFragment();
         showFragment(myTixFragment, MyTixFragment.TAG);
+        setToolbarTitle(R.string.my_tix);
     }
 
     private void showBuyTixFragment() {
         showFragment(new BuyTixFragment(), BuyTixFragment.TAG);
+        setToolbarTitle(R.string.buy);
     }
 
 
     private void showQRReaderFragment() {
         showFragment(new QRReaderFragment(), QRReaderFragment.TAG);
+        setToolbarTitle(R.string.check);
     }
 
     private void showFragment(Fragment fragment, String tag) {
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.fragmentContainer, fragment, tag);
         ft.commit();
+    }
+
+    private void setToolbarTitle(int id){
+        getSupportActionBar().setTitle(getString(id));
     }
 
     private void setUpToolbar() {
