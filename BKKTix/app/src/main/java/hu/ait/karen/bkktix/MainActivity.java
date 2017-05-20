@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity
         OnMessageFragmentAnswer {
 
     public static final String MESSAGE_FRAGMENT_TAG = "MessageFragment";
+    public static final java.lang.String KEY_EXP = "KEY_EXPIRATION";
+    public static final int TWENTY = 20;
+    public static final int SIXTY = 60;
+    public static final int ONE_HUNDRED_TWENTY = 120;
     private FragmentManager fragmentManager;
     private MyTixFragment myTixFragment;
     private MyTixExpandableListAdapter listAdapter;
@@ -48,7 +52,6 @@ public class MainActivity extends AppCompatActivity
     private TicketType tempTicketType;
     private int tempGroupPosition;
     private int tempChildPosition;
-//    public static final String KEY_MSG = "KEY_MSG";
 
 
     @Override
@@ -222,6 +225,11 @@ public class MainActivity extends AppCompatActivity
 
         MessageFragment messageFragment = new MessageFragment();
         messageFragment.setCancelable(false);
+        
+        Bundle bundle = new Bundle();
+        int minutesToExp = getTicketTypeInteger(ticketType);
+        bundle.putInt(KEY_EXP,minutesToExp);
+        messageFragment.setArguments(bundle);
 
         //store ticket info here in MainActivity
         tempTicketType = ticketType;
@@ -237,11 +245,22 @@ public class MainActivity extends AppCompatActivity
     public void onPositiveSelected() {
         listAdapter.moveTicketToValidated(tempTicketType, tempGroupPosition, tempChildPosition);
         Toast.makeText(this, R.string.ticket_validated, Toast.LENGTH_SHORT).show();
-        showMyTixFragment();
+//        showMyTixFragment();
     }
 
     @Override
     public void onNegativeSelected() {
+    }
+
+    static int getTicketTypeInteger (TicketType ticketType) {
+        switch (ticketType){
+            case _20_MINUTES:
+                return TWENTY;
+            case _60_MINUTES:
+                return SIXTY;
+            default:
+                return ONE_HUNDRED_TWENTY;
+        }
     }
 
 }

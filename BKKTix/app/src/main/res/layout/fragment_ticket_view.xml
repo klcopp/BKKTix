@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
 
         android:src="@drawable/qr_code_normal_looking_but_idk_the_link"
 

@@ -33,6 +33,8 @@ public class TicketViewFragment extends Fragment {
     private int groupPosition;
     private int childPosition;
 
+    Button btnValidate;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class TicketViewFragment extends Fragment {
         TextView tvDate = (TextView) getView().findViewById(R.id.tvTicketDate);
         TextView tvTicketType = (TextView) getView().findViewById(R.id.tvTicketType);
         TextView tvValidatedOrNot = (TextView) getView().findViewById(R.id.tvValidatedOrNot);
-        Button btnValidate = (Button) getView().findViewById(R.id.btnValidate);
+        btnValidate = (Button) getView().findViewById(R.id.btnValidate);
 
 
 
@@ -87,17 +89,32 @@ public class TicketViewFragment extends Fragment {
             Date validUntil = gcal.getTime();
 
 
-            //TODO check if this works? (validation doesn't work yet
             tvValidatedOrNot.setText("Valid until: " + validUntil);
         }
 
-        btnValidate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).showValidateTicketDialog(
-                        ticket.getTicketType(), groupPosition, childPosition, v);
-            }
-        });
+        //not yet validated
+//        if(ticket.getDateValidated() == null) {
+            btnValidate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    ((MainActivity) getActivity()).showValidateTicketDialog(
+                            ticket.getTicketType(), groupPosition, childPosition, v);
+                }
+            });
+//        }
+//        // validated
+//        else{
+//            btnValidate.setVisibility(View.GONE);
+//        }
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if(ticket.getDateValidated() != null){
+            btnValidate.setVisibility(View.GONE);
+        }
     }
 
     private QRCodeEncoder makeQRCodeEncoder(String data, int size) {
@@ -110,7 +127,6 @@ public class TicketViewFragment extends Fragment {
         this.groupPosition = groupPosition;
         this.childPosition = childPosition;
     }
-
 
 }
 

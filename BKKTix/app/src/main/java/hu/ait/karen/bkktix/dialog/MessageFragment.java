@@ -37,7 +37,7 @@ public class MessageFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-//        String message = getArguments().getString(MainActivity.KEY_MSG);
+        int minutesTillExpiration = getArguments().getInt(MainActivity.KEY_EXP);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 getActivity());
@@ -48,7 +48,8 @@ public class MessageFragment extends DialogFragment {
 
 
         alertDialogBuilder.setTitle(R.string.validate_ticket);
-        alertDialogBuilder.setMessage(R.string.are_you_sure);
+        alertDialogBuilder.setMessage(
+                String.format(getString(R.string.are_you_sure), minutesTillExpiration));
         alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
