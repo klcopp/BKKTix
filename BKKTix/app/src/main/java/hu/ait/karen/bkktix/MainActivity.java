@@ -1,6 +1,5 @@
 package hu.ait.karen.bkktix;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,7 +13,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import java.util.Date;
 
@@ -71,13 +69,13 @@ public class MainActivity extends AppCompatActivity
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.nav_myTix:
                     showMyTixFragment();
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.nav_buyTix:
                     showBuyTixFragment();
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.nav_QRCheck:
                     showQRReaderFragment();
                     return true;
             }

@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/nav_myTix"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/my_tix" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/nav_buyTix"
         android:icon="@drawable/plus"
         android:title="@string/buy" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/nav_QRCheck"
         android:icon="@drawable/qr_code_with_magnifying_glass"
         android:title="@string/check" />
 
