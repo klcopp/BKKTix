@@ -21,7 +21,6 @@ public class BuyTixFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_buy_tix, container, false);
 
 
-
         Button btnBuy20Min = (Button) rootView.findViewById(R.id.btnBuy20Min);
         btnBuy20Min.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,8 +36,6 @@ public class BuyTixFragment extends Fragment {
                 ((MainActivity) getActivity()).addNewTicket(TicketType._60_MINUTES);
             }
         });
-
-
 
         Button btnBuy120Min = (Button) rootView.findViewById(R.id.btnBuy120Min);
         btnBuy120Min.setOnClickListener(new View.OnClickListener() {

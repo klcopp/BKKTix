@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setUpUI() {
-
+        setUpToolbar();
         setUpNavigationView();
         setUpBottomNavigation();
-        setUpToolbar();
 
-//        TODO set the toolbar title like: (?)
+
+////        TODO set the toolbar title like: (?)
 //        toolbar.setTitle("esurance");
     }
 
@@ -120,8 +120,11 @@ public class MainActivity extends AppCompatActivity
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        Toolbar toolbar = LayoutInflater.from(this).inflate(R.layout.toolbar, null)
-//        setSupportActionBar(toolbar);
+
+//        //TODO Delete
+//        getActionBar().setHomeButtonEnabled(true);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setHomeAsUpIndicator(getResources().getDrawable(R.drawable.ic_home_black_24dp));
     }
 
     @Override
