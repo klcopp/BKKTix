@@ -21,8 +21,8 @@ import hu.ait.karen.bkktix.data.Ticket;
  */
 
 public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
-    
-    public enum HeaderType{
+
+    public enum HeaderType {
         VALIDATED_TICKETS, _20_MINUTE_TICKETS, _60_MINUTE_TICKETS, _120_MINUTE_TICKETS
     }
 
@@ -34,29 +34,21 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     public MyTixExpandableListAdapter(Context context) {
         this._context = context;
         listDataHeaders = new ArrayList<HeaderType>();
-        for (HeaderType headerType: HeaderType.values()
-             ) {
+        for (HeaderType headerType : HeaderType.values()
+                ) {
             listDataHeaders.add(headerType);
         }
 
         listDataChildren = new HashMap<HeaderType, List<Ticket>>();
-        for (HeaderType header: listDataHeaders) {
+        for (HeaderType header : listDataHeaders) {
             listDataChildren.put(header, new ArrayList<Ticket>());
         }
 
-//        //TODO delete. this works.
-//        listDataChildren.get(HeaderType._60_MINUTE_TICKETS).add(
-//                new Ticket(new Date(System.currentTimeMillis())));
-//
-//        //TODO delete. this works.
-//        addChild(new Ticket(new Date(System.currentTimeMillis()), TicketType._20_MINUTES));
-
-
     }
 
-    public void addChild(Ticket ticket){
+    public void addChild(Ticket ticket) {
         TicketType type = ticket.getTicketType();
-        switch (type){
+        switch (type) {
             case _20_MINUTES:
                 listDataChildren.get(HeaderType._20_MINUTE_TICKETS).add(ticket);
                 break;
@@ -67,13 +59,14 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
                 listDataChildren.get(HeaderType._120_MINUTE_TICKETS).add(ticket);
                 break;
         }
-
+//        notifyDataSetChanged(); this is apparently unnecessary
     }
 
     public void moveTicketToValidated(TicketType ticketType, int groupPosition, int childPosition) {
         listDataChildren.get(HeaderType.VALIDATED_TICKETS).add(
                 (Ticket) getChild(groupPosition, childPosition));
-        listDataChildren.get(ticketType).remove(childPosition);
+        listDataChildren.get((HeaderType) getGroup(groupPosition)).remove(childPosition);
+        notifyDataSetChanged();
     }
 
 
@@ -104,7 +97,7 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
         Ticket childName = (Ticket) getChild(groupPosition, childPosition);
 
         //TODO change, and extract string resource
-        txtListChild.setText("Bought at: "+
+        txtListChild.setText("Bought at: " +
                 childName.getDatePurchased().toString());
         return convertView;
     }
@@ -135,7 +128,7 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         String headerTitle;
         HeaderType header = (HeaderType) getGroup(groupPosition);
-        switch (header){
+        switch (header) {
             case VALIDATED_TICKETS:
                 headerTitle = _context.getString(R.string.validated_tickets);
                 break;
@@ -169,7 +162,7 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
         TextView tvNumberTickets = (TextView) convertView.findViewById(R.id.tvNumberTickets);
         tvNumberTickets.setTypeface(null, Typeface.BOLD);
 
-        tvNumberTickets.setText(""+ getChildrenCount(groupPosition));
+        tvNumberTickets.setText("" + getChildrenCount(groupPosition));
 //        TODO ^STRING
 
         return convertView;
@@ -184,8 +177,6 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
-
-
 
 
 }

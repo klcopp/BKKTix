@@ -223,15 +223,11 @@ public class MainActivity extends AppCompatActivity
         MessageFragment messageFragment = new MessageFragment();
         messageFragment.setCancelable(false);
 
-
+        //store ticket info here in MainActivity
         tempTicketType = ticketType;
         tempGroupPosition = groupPosition;
         tempChildPosition = childPosition;
 
-//        Bundle bundle = new Bundle();
-////        bundle.putString(KEY_MSG,"You have press button 1, ok?");
-////        bundle.pu(ticketType)
-//        messageFragment.setArguments(bundle);
 
         messageFragment.show(getSupportFragmentManager(),
                 MESSAGE_FRAGMENT_TAG);
@@ -241,6 +237,7 @@ public class MainActivity extends AppCompatActivity
     public void onPositiveSelected() {
         listAdapter.moveTicketToValidated(tempTicketType, tempGroupPosition, tempChildPosition);
         Toast.makeText(this, R.string.ticket_validated, Toast.LENGTH_SHORT).show();
+        showMyTixFragment();
     }
 
     @Override
