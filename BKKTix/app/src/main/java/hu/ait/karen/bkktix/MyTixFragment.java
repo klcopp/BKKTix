@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
-
+import hu.ait.karen.bkktix.data.Ticket;
 
 
 public class MyTixFragment extends Fragment {
@@ -32,7 +32,21 @@ public class MyTixFragment extends Fragment {
         listAdapter = ((MainActivity) getActivity()).getListAdapter();
         expListView.setAdapter(listAdapter);
 
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+
+                Ticket ticket = (Ticket) listAdapter.getChild(groupPosition, childPosition);
+
+                ((MainActivity) getActivity()).showTicket(ticket);
+
+                //orig:
+//                return false;
+                return true;
+            }
+        });
 
         return rootView;
     }

@@ -1,7 +1,6 @@
 package hu.ait.karen.bkktix.adapter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -138,13 +137,13 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
                 headerTitle = _context.getString(R.string.validated_tickets);
                 break;
             case _20_MINUTE_TICKETS:
-                headerTitle = _context.getString(R.string._20_min_tix);
+                headerTitle = _context.getString(R.string.new_20_min_tix);
                 break;
             case _60_MINUTE_TICKETS:
-                headerTitle = _context.getString(R.string._60_min_tix);
+                headerTitle = _context.getString(R.string.new_60_min_tix);
                 break;
             case _120_MINUTE_TICKETS:
-                headerTitle = _context.getString(R.string._120_min_tix);
+                headerTitle = _context.getString(R.string.new_120_min_tix);
                 break;
             default:
                 headerTitle = "idk";
@@ -182,5 +181,8 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
+
+
 
 }

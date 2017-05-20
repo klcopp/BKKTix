@@ -3,18 +3,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/account"
-            android:icon="@android:drawable/ic_input_add"
+            android:id="@+id/nav_account"
+            android:icon="@android:drawable/star_big_off"
             android:title="@string/account" />
 
+
         <item
-            android:id="@+id/help"
-            android:icon="@android:drawable/ic_input_add"
-            android:title="@string/help" />
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@android:drawable/ic_menu_help"
+            android:id="@+id/nav_history"
+            android:icon="@android:drawable/ic_menu_recent_history"
             android:title="@string/history" />
+
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="@string/help" />
     </group>
 
 </menu>
