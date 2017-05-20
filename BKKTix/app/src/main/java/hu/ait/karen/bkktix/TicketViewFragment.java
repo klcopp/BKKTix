@@ -1,7 +1,9 @@
 package hu.ait.karen.bkktix;
 
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -18,6 +23,8 @@ import java.util.jar.Manifest;
 
 import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.data.TicketType;
+import hu.ait.karen.bkktix.qr.Contents;
+import hu.ait.karen.bkktix.qr.QRCodeEncoder;
 
 
 public class TicketViewFragment extends Fragment {
@@ -50,6 +57,14 @@ public class TicketViewFragment extends Fragment {
         // TODO                            - dialog:"do you really want to validate this ticket for ___ minutes?"
         //TODO                                   & if ok: add date validated
         //TODO                                   & send this ticket back to MainActivity etc.
+
+        QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder("Testing QR code.", 500);
+        try {
+            Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+            ivQRCode.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
 
 
         tvDate.setText(String.format(getString(R.string.purchased_at), ticket.getDatePurchased()));
@@ -91,11 +106,13 @@ public class TicketViewFragment extends Fragment {
             }
         });
 
-
-
+    @NonNull
+    private QRCodeEncoder makeQRCodeEncoder(String data, int size) {
+        return new QRCodeEncoder(data, null,
+                Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), size);
     }
 
-    public void sendTicket(Ticket ticket, int groupPosition, int childPosition) {
+    public void sendTicket(Ticket ticket) {
         this.ticket = ticket;
         this.groupPosition = groupPosition;
         this.childPosition = childPosition;

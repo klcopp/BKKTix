@@ -12,9 +12,19 @@
         android:text="QR Reader"
         android:textSize="56dp" />
 
+    <ImageView
+        android:id="@+id/qrCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <hu.ait.karen.bkktix.camera.CameraSourcePreview
         android:id="@+id/cameraSourcePreview"
         android:layout_width="320dp"
         android:layout_height="320dp" />
+
+    <TextView
+        android:id="@+id/codeInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
