@@ -28,4 +28,5 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="validate_ticket">Validate Ticket</string>
+    <string name="ticket_validated">Ticket validated</string>
 </resources>

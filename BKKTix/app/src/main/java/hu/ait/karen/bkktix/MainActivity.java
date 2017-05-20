@@ -32,15 +32,23 @@ import java.util.Date;
 import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
 import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.data.TicketType;
+import hu.ait.karen.bkktix.dialog.MessageFragment;
+import hu.ait.karen.bkktix.dialog.OnMessageFragmentAnswer;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener,
+        OnMessageFragmentAnswer {
 
+    public static final String MESSAGE_FRAGMENT_TAG = "MessageFragment";
     private FragmentManager fragmentManager;
     private MyTixFragment myTixFragment;
     private MyTixExpandableListAdapter listAdapter;
     private Toolbar toolbar;
     private String currentFragment = MyTixFragment.TAG;
+    private TicketType tempTicketType;
+    private int tempGroupPosition;
+    private int tempChildPosition;
+//    public static final String KEY_MSG = "KEY_MSG";
 
 
     @Override
@@ -211,40 +219,32 @@ public class MainActivity extends AppCompatActivity
 
 
     public void showValidateTicketDialog(final TicketType ticketType, final int groupPosition, final int childPosition, View v) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        builder.setTitle(R.string.validate_ticket);
-        int validTime;
-        switch (ticketType){
-            case _20_MINUTES:
-                validTime = 20;
-                break;
-            case _60_MINUTES:
-                validTime = 60;
-                break;
-            default: validTime = 120;
-        }
 
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        final TextView tvAreYouSure = new TextView(this);
-        tvAreYouSure.setText(String.format(getString(R.string.are_you_sure), validTime));
-        layout.addView(tvAreYouSure);
-        layout.setPadding(30, 30, 30, 30);
+        MessageFragment messageFragment = new MessageFragment();
+        messageFragment.setCancelable(false);
 
-        builder.setView(layout);
 
-        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                listAdapter.moveTicketToValidated(ticketType, groupPosition, childPosition);
-            }
-        });
-        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        tempTicketType = ticketType;
+        tempGroupPosition = groupPosition;
+        tempChildPosition = childPosition;
 
+//        Bundle bundle = new Bundle();
+////        bundle.putString(KEY_MSG,"You have press button 1, ok?");
+////        bundle.pu(ticketType)
+//        messageFragment.setArguments(bundle);
+
+        messageFragment.show(getSupportFragmentManager(),
+                MESSAGE_FRAGMENT_TAG);
     }
+
+    @Override
+    public void onPositiveSelected() {
+        listAdapter.moveTicketToValidated(tempTicketType, tempGroupPosition, tempChildPosition);
+        Toast.makeText(this, R.string.ticket_validated, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNegativeSelected() {
+    }
+
 }

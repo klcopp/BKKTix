@@ -3,7 +3,6 @@ package hu.ait.karen.bkktix;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -52,10 +51,7 @@ public class TicketViewFragment extends Fragment {
         Button btnValidate = (Button) getView().findViewById(R.id.btnValidate);
 
 
-        //TODO I promise the validate button is there, it's just hidden. add onclicklistener
-        // TODO                            - dialog:"do you really want to validate this ticket for ___ minutes?"
-        //TODO                                   & if ok: add date validated
-        //TODO                                   & send this ticket back to MainActivity etc.
+
 
         QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder("Testing QR code.", 500);
         try {

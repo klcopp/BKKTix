@@ -21,10 +21,7 @@ import hu.ait.karen.bkktix.data.Ticket;
  */
 
 public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
-
-
-
-
+    
     public enum HeaderType{
         VALIDATED_TICKETS, _20_MINUTE_TICKETS, _60_MINUTE_TICKETS, _120_MINUTE_TICKETS
     }
@@ -73,10 +70,10 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 
     }
 
-    public void moveTicketToValidated(TicketType ticketType, int groupPosition, int childPosititon) {
+    public void moveTicketToValidated(TicketType ticketType, int groupPosition, int childPosition) {
         listDataChildren.get(HeaderType.VALIDATED_TICKETS).add(
-                (Ticket) getChild(groupPosition, childPosititon));
-        listDataChildren.get(ticketType).remove((Ticket) getChild(groupPosition, childPosititon));
+                (Ticket) getChild(groupPosition, childPosition));
+        listDataChildren.get(ticketType).remove(childPosition);
     }
 
 
