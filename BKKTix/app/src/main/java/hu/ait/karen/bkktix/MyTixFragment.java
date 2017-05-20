@@ -40,7 +40,7 @@ public class MyTixFragment extends Fragment {
 
                 Ticket ticket = (Ticket) listAdapter.getChild(groupPosition, childPosition);
 
-                ((MainActivity) getActivity()).showTicket(ticket);
+                ((MainActivity) getActivity()).showTicket(ticket, groupPosition, childPosition);
 
                 //orig:
 //                return false;

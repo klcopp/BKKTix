@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.jar.Manifest;
 
 import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.data.TicketType;
@@ -22,7 +23,9 @@ import hu.ait.karen.bkktix.data.TicketType;
 public class TicketViewFragment extends Fragment {
 
     public static final String TAG = "TicketViewFragment";
-    Ticket ticket;
+    private Ticket ticket;
+    private int groupPosition;
+    private int childPosition;
 
     @Nullable
     @Override
@@ -42,6 +45,7 @@ public class TicketViewFragment extends Fragment {
         Button btnValidate = (Button) getView().findViewById(R.id.btnValidate);
 
         //TODO something with ivQRCode.
+
         //TODO I promise the validate button is there, it's just hidden. add onclicklistener
         // TODO                            - dialog:"do you really want to validate this ticket for ___ minutes?"
         //TODO                                   & if ok: add date validated
@@ -79,11 +83,27 @@ public class TicketViewFragment extends Fragment {
             tvValidatedOrNot.setText("Valid until: "+ validUntil);
         }
 
+        btnValidate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).showValidateTicketDialog(
+                        ticket.getTicketType(), groupPosition, childPosition, v);
+            }
+        });
+
+
+
     }
 
-    public void sendTicket(Ticket ticket) {
+    public void sendTicket(Ticket ticket, int groupPosition, int childPosition) {
         this.ticket = ticket;
+        this.groupPosition = groupPosition;
+        this.childPosition = childPosition;
     }
+
+
+
+
 }
 
 

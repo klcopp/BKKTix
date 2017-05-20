@@ -1,5 +1,6 @@
 package hu.ait.karen.bkktix;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,9 +11,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Date;
 
@@ -27,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private MyTixFragment myTixFragment;
     private MyTixExpandableListAdapter listAdapter;
     private Toolbar toolbar;
+    private String currentFragment = MyTixFragment.TAG;
 
 
     @Override
@@ -84,11 +93,12 @@ public class MainActivity extends AppCompatActivity
 
     };
 
-    public void showTicket(Ticket ticket) {
+    public void showTicket(Ticket ticket, int groupPosition, int childPosition) {
         TicketViewFragment newTVFragment = new TicketViewFragment();
-        newTVFragment.sendTicket(ticket);
+        newTVFragment.sendTicket(ticket, groupPosition, childPosition);
         showFragment(newTVFragment, TicketViewFragment.TAG);
         setToolbarTitle(R.string.ticket);
+
     }
 
     private void showMyTixFragment() {
@@ -109,6 +119,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showFragment(Fragment fragment, String tag) {
+        currentFragment = tag;
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.replace(R.id.fragmentContainer, fragment, tag);
         ft.commit();
@@ -122,11 +133,6 @@ public class MainActivity extends AppCompatActivity
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-//        //TODO Delete
-//        getActionBar().setHomeButtonEnabled(true);
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
-//        getActionBar().setHomeAsUpIndicator(getResources().getDrawable(R.drawable.ic_home_black_24dp));
     }
 
     //In case we want an extra menu:
@@ -173,7 +179,12 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.END)) {
             drawer.closeDrawer(GravityCompat.END);
         } else {
-            super.onBackPressed();
+            if(currentFragment.equals(MyTixFragment.TAG)) {
+                super.onBackPressed();
+            }
+            else{
+                showMyTixFragment();
+            }
         }
     }
 
@@ -194,4 +205,41 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void showValidateTicketDialog(final TicketType ticketType, final int groupPosition, final int childPosition, View v) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        builder.setTitle(R.string.validate_ticket);
+        int validTime;
+        switch (ticketType){
+            case _20_MINUTES:
+                validTime = 20;
+                break;
+            case _60_MINUTES:
+                validTime = 60;
+                break;
+            default: validTime = 120;
+        }
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        final TextView tvAreYouSure = new TextView(this);
+        tvAreYouSure.setText(String.format(getString(R.string.are_you_sure), validTime));
+        layout.addView(tvAreYouSure);
+        layout.setPadding(30, 30, 30, 30);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                listAdapter.moveTicketToValidated(ticketType, groupPosition, childPosition);
+            }
+        });
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+    }
 }
