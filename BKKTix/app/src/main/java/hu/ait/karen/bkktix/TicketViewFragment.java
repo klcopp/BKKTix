@@ -51,7 +51,6 @@ public class TicketViewFragment extends Fragment {
         TextView tvValidatedOrNot = (TextView) getView().findViewById(R.id.tvValidatedOrNot);
         Button btnValidate = (Button) getView().findViewById(R.id.btnValidate);
 
-        //TODO something with ivQRCode.
 
         //TODO I promise the validate button is there, it's just hidden. add onclicklistener
         // TODO                            - dialog:"do you really want to validate this ticket for ___ minutes?"
@@ -70,8 +69,8 @@ public class TicketViewFragment extends Fragment {
         tvDate.setText(String.format(getString(R.string.purchased_at), ticket.getDatePurchased()));
 
         int minutesToAdd = 20;
-        String ticketTypeString=getString(R.string._20_min_tix);
-        switch (ticket.getTicketType()){
+        String ticketTypeString = getString(R.string._20_min_tix);
+        switch (ticket.getTicketType()) {
             case _60_MINUTES:
                 ticketTypeString = getString(R.string._60_min_tix);
                 minutesToAdd = 60;
@@ -82,12 +81,10 @@ public class TicketViewFragment extends Fragment {
                 break;
         }
 
-        //TODO says 'Valid for 1 hour'. this is confusing; clarify that the ticket is not validated yet.
         tvTicketType.setText(ticketTypeString);
-        if(ticket.getDateValidated() == null){
+        if (ticket.getDateValidated() == null) {
             tvValidatedOrNot.setText(R.string.not_validated);
-        }
-        else {
+        } else {
             Calendar gcal = new GregorianCalendar();
             gcal.setTime(ticket.getDateValidated());
             gcal.add(Calendar.SECOND, minutesToAdd);
@@ -95,7 +92,7 @@ public class TicketViewFragment extends Fragment {
 
 
             //TODO check if this works? (validation doesn't work yet
-            tvValidatedOrNot.setText("Valid until: "+ validUntil);
+            tvValidatedOrNot.setText("Valid until: " + validUntil);
         }
 
         btnValidate.setOnClickListener(new View.OnClickListener() {
@@ -105,20 +102,18 @@ public class TicketViewFragment extends Fragment {
                         ticket.getTicketType(), groupPosition, childPosition, v);
             }
         });
+    }
 
-    @NonNull
     private QRCodeEncoder makeQRCodeEncoder(String data, int size) {
         return new QRCodeEncoder(data, null,
                 Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), size);
     }
 
-    public void sendTicket(Ticket ticket) {
+    public void sendTicket(Ticket ticket, int groupPosition, int childPosition) {
         this.ticket = ticket;
         this.groupPosition = groupPosition;
         this.childPosition = childPosition;
     }
-
-
 
 
 }
