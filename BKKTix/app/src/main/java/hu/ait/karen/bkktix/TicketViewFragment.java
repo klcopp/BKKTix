@@ -2,7 +2,6 @@ package hu.ait.karen.bkktix;
 
 
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,7 +23,6 @@ import java.util.GregorianCalendar;
 
 
 import hu.ait.karen.bkktix.data.Ticket;
-import hu.ait.karen.bkktix.qr.AesCbcWithIntegrity;
 import hu.ait.karen.bkktix.qr.Contents;
 import hu.ait.karen.bkktix.qr.QRCodeEncoder;
 
@@ -39,7 +37,7 @@ public class TicketViewFragment extends Fragment {
     private int childPosition;
 
     private static String PASSWORD = "this passphrase will generate the key for a BKKTix ticket!";
-    private CipherTextIvMac civ;
+
 
     Button btnValidate;
 
@@ -86,8 +84,8 @@ public class TicketViewFragment extends Fragment {
 
             tvValidatedOrNot.setText("Valid until: " + validUntil);
 
-            setValidQRCode();
-            QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder(civ.toString(), 500);
+            CipherTextIvMac encryptedDate = encryptDate(validUntil);
+            QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder(encryptedDate.toString(), 500);
             try {
                 Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
                 ivQRCode.setImageBitmap(bitmap);
@@ -112,14 +110,16 @@ public class TicketViewFragment extends Fragment {
 //        }
     }
 
-    private void setValidQRCode() {
+    private CipherTextIvMac encryptDate(Date validUntil) {
+
+        CipherTextIvMac civ = null;
 
         try {
             SecretKeys key;
             String salt = saltString(generateSalt());
             key = generateKeyFromPassword(PASSWORD, salt);
 
-            String dateToEncrypt = ticket.getDateValidated().toString();
+            String dateToEncrypt = validUntil.toString();
 
             civ = encrypt(dateToEncrypt, key);
 
@@ -127,6 +127,8 @@ public class TicketViewFragment extends Fragment {
             //textToEncrypt.equals(decryptedText);
 
         } catch (GeneralSecurityException | UnsupportedEncodingException e) {}
+
+        return civ;
     }
 
     @Override
