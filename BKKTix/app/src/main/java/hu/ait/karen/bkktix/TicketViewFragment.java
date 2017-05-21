@@ -79,7 +79,7 @@ public class TicketViewFragment extends Fragment {
         } else {
             Calendar gcal = new GregorianCalendar();
             gcal.setTime(ticket.getDateValidated());
-            gcal.add(Calendar.SECOND, minutesToAdd);
+            gcal.add(Calendar.MINUTE, minutesToAdd);
             Date validUntil = gcal.getTime();
 
             tvValidatedOrNot.setText("Valid until: " + validUntil);
