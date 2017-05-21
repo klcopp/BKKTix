@@ -2,6 +2,7 @@ package hu.ait.karen.bkktix;
 
 
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,15 +16,19 @@ import android.widget.TextView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.jar.Manifest;
+
 
 import hu.ait.karen.bkktix.data.Ticket;
-import hu.ait.karen.bkktix.data.TicketType;
+import hu.ait.karen.bkktix.qr.AesCbcWithIntegrity;
 import hu.ait.karen.bkktix.qr.Contents;
 import hu.ait.karen.bkktix.qr.QRCodeEncoder;
+
+import static hu.ait.karen.bkktix.qr.AesCbcWithIntegrity.*;
 
 
 public class TicketViewFragment extends Fragment {
@@ -32,6 +37,9 @@ public class TicketViewFragment extends Fragment {
     private Ticket ticket;
     private int groupPosition;
     private int childPosition;
+
+    private static String PASSWORD = "this passphrase will generate the key for a BKKTix ticket!";
+    private CipherTextIvMac civ;
 
     Button btnValidate;
 
@@ -51,18 +59,6 @@ public class TicketViewFragment extends Fragment {
         TextView tvTicketType = (TextView) getView().findViewById(R.id.tvTicketType);
         TextView tvValidatedOrNot = (TextView) getView().findViewById(R.id.tvValidatedOrNot);
         btnValidate = (Button) getView().findViewById(R.id.btnValidate);
-
-
-
-
-        QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder("Testing QR code.", 500);
-        try {
-            Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-            ivQRCode.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-
 
         tvDate.setText(String.format(getString(R.string.purchased_at), ticket.getDatePurchased()));
 
@@ -88,8 +84,16 @@ public class TicketViewFragment extends Fragment {
             gcal.add(Calendar.SECOND, minutesToAdd);
             Date validUntil = gcal.getTime();
 
-
             tvValidatedOrNot.setText("Valid until: " + validUntil);
+
+            setValidQRCode();
+            QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder(civ.toString(), 500);
+            try {
+                Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+                ivQRCode.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
         }
 
         //not yet validated
@@ -97,7 +101,6 @@ public class TicketViewFragment extends Fragment {
             btnValidate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     ((MainActivity) getActivity()).showValidateTicketDialog(
                             ticket.getTicketType(), groupPosition, childPosition, v);
                 }
@@ -107,6 +110,23 @@ public class TicketViewFragment extends Fragment {
 //        else{
 //            btnValidate.setVisibility(View.GONE);
 //        }
+    }
+
+    private void setValidQRCode() {
+
+        try {
+            SecretKeys key;
+            String salt = saltString(generateSalt());
+            key = generateKeyFromPassword(PASSWORD, salt);
+
+            String dateToEncrypt = ticket.getDateValidated().toString();
+
+            civ = encrypt(dateToEncrypt, key);
+
+            //String decryptedDate = decryptString(civ, key);
+            //textToEncrypt.equals(decryptedText);
+
+        } catch (GeneralSecurityException | UnsupportedEncodingException e) {}
     }
 
     @Override

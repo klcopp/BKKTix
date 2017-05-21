@@ -1,9 +1,5 @@
 package hu.ait.karen.bkktix.data;
 
-/**
- * Created by karencoppage on 5/19/17.
- */
-
 public enum TicketType {
 
     _20_MINUTES,

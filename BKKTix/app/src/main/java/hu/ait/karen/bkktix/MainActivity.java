@@ -1,30 +1,20 @@
 package hu.ait.karen.bkktix;
 
-import android.content.DialogInterface;
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
 import android.widget.Toast;
 
 import java.util.Date;
@@ -52,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private TicketType tempTicketType;
     private int tempGroupPosition;
     private int tempChildPosition;
+
 
 
     @Override
@@ -221,7 +212,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void showValidateTicketDialog(final TicketType ticketType, final int groupPosition, final int childPosition, View v) {
+    public void showValidateTicketDialog(final TicketType ticketType, final int groupPosition,
+                                         final int childPosition, View v) {
 
         MessageFragment messageFragment = new MessageFragment();
         messageFragment.setCancelable(false);
@@ -243,8 +235,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onPositiveSelected() {
+        ((Ticket) listAdapter.getChild(tempGroupPosition, tempChildPosition)).
+                setDateValidated(new Date(System.currentTimeMillis()));
         listAdapter.moveTicketToValidated(tempTicketType, tempGroupPosition, tempChildPosition);
         Toast.makeText(this, R.string.ticket_validated, Toast.LENGTH_SHORT).show();
+
 //        showMyTixFragment();
     }
 
