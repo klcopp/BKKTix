@@ -10,7 +10,7 @@
 
     <hu.ait.karen.bkktix.camera.CameraSourcePreview
         android:id="@+id/cameraSourcePreview"
-        android:layout_width="match_parent"
+        android:layout_width="290dp"
         android:layout_height="0sp"
         android:layout_gravity="center"
         android:layout_weight="4"/>
