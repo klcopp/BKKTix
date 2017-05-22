@@ -6,5 +6,6 @@
     <color name="colorBackgroundGray">#eeeeee</color>
     <color name="colorPurple">#57275e</color>
     <color name="colorLightPurple">#85528b</color>
+    <color name="colorVeryLightPurple">#c1acc4</color>
     <color name="colorDarkPurple">#2c0034</color>
 </resources>
