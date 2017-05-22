@@ -27,6 +27,7 @@ import hu.ait.karen.bkktix.dialog.MessageFragment;
 import hu.ait.karen.bkktix.dialog.OnMessageFragmentAnswer;
 import hu.ait.karen.bkktix.dialog.VerifyPurchaseMessageFragment;
 import hu.ait.karen.bkktix.dialog.VerifyPurchaseMessageFragmentAnswer;
+import hu.ait.karen.bkktix.fragment.AboutFragment;
 import hu.ait.karen.bkktix.fragment.BuyTixFragment;
 import hu.ait.karen.bkktix.fragment.HistoryFragment;
 import hu.ait.karen.bkktix.fragment.MyTixFragment;
@@ -158,9 +159,13 @@ public class MainActivity extends AppCompatActivity
         setToolbarTitle(R.string.check);
     }
 
-    private void showHistoryFragment(){
+    private void showHistoryFragment() {
         if (historyFragment == null) historyFragment = new HistoryFragment();
         showFragment(historyFragment, HistoryFragment.TAG);
+    }
+
+    private void showAboutFragment() {
+        showFragment(new AboutFragment(), AboutFragment.TAG);
     }
 
     private void showFragment(Fragment fragment, String tag) {
@@ -236,10 +241,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_account) {
-        } else if (id == R.id.nav_history) {
+//        if (id == R.id.nav_account) {
+//        } else
+        if (id == R.id.nav_history) {
             showHistoryFragment();
         } else if (id == R.id.nav_help) {
+            showAboutFragment();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -335,7 +342,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onPurchaseCancelledSelected() {
-        Toast.makeText(this, "Purchase cancelled.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.cancelled, Toast.LENGTH_SHORT).show();
         showMyTixFragment();
     }
 }
