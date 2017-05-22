@@ -33,7 +33,7 @@
             android:id="@+id/codeInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Need ticket."
+            android:text="Scan ticket."
             android:textSize="30dp" />
 
     </LinearLayout>

@@ -5,102 +5,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     app:theme="@style/AppTheme"
+    android:padding="30dp"
     android:background="@color/colorBackgroundGray">
 
 
     <TextView
+        android:id="@+id/tvTicketType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/etUserName"
         android:text="Type of Ticket:"
-        android:layout_above="@+id/ticketTypeSpinner"
+        android:layout_alignParentStart="true"
         />
     <Spinner
-        android:layout_marginTop="50dp"
         android:id="@+id/ticketTypeSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/etAddress1"
-        android:layout_alignStart="@+id/etUserName" />
+        android:layout_below="@+id/tvTicketType"
+        android:layout_toLeftOf="@+id/npTicketAmount"/>
 
     <NumberPicker
         android:id="@+id/npTicketAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
-
-        >
+        android:layout_alignParentEnd="true">
 
     </NumberPicker>
-
-    <EditText
-        android:id="@+id/etUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Name on credit card"
-        android:layout_marginTop="170dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_toStartOf="@+id/npTicketAmount" />
-    <!--TODO STRINGS ^-->
-
-    <EditText
-        android:id="@+id/etCardNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:hint="Card Number"
-        android:layout_below="@+id/etUserName"
-        android:layout_alignStart="@+id/etUserName"
-        android:layout_alignEnd="@+id/npTicketAmount" />
-
-    <EditText
-        android:id="@+id/etSecurityCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:fontFamily="sans-serif"
-        android:hint="Security Code"
-        android:layout_below="@+id/etCardNumber"
-        android:layout_alignStart="@+id/etCardNumber"
-        />
-
-    <EditText
-        android:id="@+id/etAddress1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Address Line 1"
-        android:layout_below="@+id/etSecurityCode"
-        android:layout_alignStart="@+id/etSecurityCode"
-        android:layout_toStartOf="@+id/btnBuy" />
-
-    <EditText
-        android:id="@+id/etCityState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="City (and State)"
-        android:layout_below="@+id/etAddress1"
-        android:layout_alignStart="@+id/etAddress1"
-        android:layout_alignEnd="@+id/etAddress1" />
-
-    <EditText
-        android:id="@+id/etCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Country"
-        android:layout_above="@+id/btnBuy"
-        android:layout_alignStart="@+id/etCityState"
-        android:layout_toStartOf="@+id/btnBuy" />
 
     <Button
         android:id="@+id/btnBuy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="33dp"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/ticketTypeSpinner"
+        android:layout_alignParentStart="true"
 
         android:text="@string/buy"/>
 

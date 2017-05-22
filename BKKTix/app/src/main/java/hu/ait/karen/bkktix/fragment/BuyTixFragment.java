@@ -27,12 +27,6 @@ public class BuyTixFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_buy_tix, container, false);
 
         final Spinner spinner = (Spinner) rootView.findViewById(R.id.ticketTypeSpinner);
-        final EditText etUserName = (EditText) rootView.findViewById(R.id.etUserName);
-        final EditText etCardNumber = (EditText) rootView.findViewById(R.id.etCardNumber);
-        final EditText etSecurityCode = (EditText) rootView.findViewById(R.id.etSecurityCode);
-        final EditText etAddress1 = (EditText) rootView.findViewById(R.id.etAddress1);
-        final EditText etCityState = (EditText) rootView.findViewById(R.id.etCityState);
-        final EditText etCountry = (EditText) rootView.findViewById(R.id.etCountry);
         final NumberPicker numberPicker = (NumberPicker) rootView.findViewById(R.id.npTicketAmount);
         Button btnBuyTix = (Button) rootView.findViewById(R.id.btnBuy);
 
@@ -51,22 +45,10 @@ public class BuyTixFragment extends Fragment {
 
                 int spinnerTicketTypePosition = spinner.getSelectedItemPosition();
                 int numberOfTickets = numberPicker.getValue();
-                String userName = etUserName.getText().toString();
-                String creditCardNumber = etCardNumber.getText().toString();
-                String securityCode = etSecurityCode.getText().toString();
-                String address1 = etAddress1.getText().toString();
-                String cityState = etCityState.getText().toString();
-                String country = etCountry.getText().toString();
 
                 ((MainActivity) getActivity()).verifyPurchase(
                         spinnerTicketTypePosition,
-                        numberOfTickets,
-                        userName,
-                        creditCardNumber,
-                        securityCode,
-                        address1,
-                        cityState,
-                        country);
+                        numberOfTickets);
             }
         });
 
