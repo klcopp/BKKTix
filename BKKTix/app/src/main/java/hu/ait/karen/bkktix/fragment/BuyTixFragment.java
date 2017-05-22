@@ -42,7 +42,6 @@ public class BuyTixFragment extends Fragment {
         btnBuyTix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int spinnerTicketTypePosition = spinner.getSelectedItemPosition();
                 int numberOfTickets = numberPicker.getValue();
 
@@ -51,33 +50,6 @@ public class BuyTixFragment extends Fragment {
                         numberOfTickets);
             }
         });
-
-
-//  Dummy buttons:
-
-//        Button btnBuy20Min = (Button) rootView.findViewById(R.id.btnBuy20Min);
-//        btnBuy20Min.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ((MainActivity) getActivity()).addNewTicket(TicketType._20_MINUTES);
-//            }
-//        });
-//
-//        Button btnBuy60Min = (Button) rootView.findViewById(R.id.btnBuy60Min);
-//        btnBuy60Min.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ((MainActivity) getActivity()).addNewTicket(TicketType._60_MINUTES);
-//            }
-//        });
-//
-//        Button btnBuy120Min = (Button) rootView.findViewById(R.id.btnBuy120Min);
-//        btnBuy120Min.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ((MainActivity) getActivity()).addNewTicket(TicketType._120_MINUTES);
-//            }
-//        });
 
         return rootView;
     }

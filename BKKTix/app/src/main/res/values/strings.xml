@@ -68,4 +68,10 @@
     <string name="sure">Are you sure?</string>
     <string name="sure_long" formatted="true">Are you sure you want to buy %1$d tickets? They will be valid for %2$d minutes.</string>
     <string name="quip">Making Budapest travel easier since 2017</string>
+    <string name="type_of_ticket">Type of Ticket:</string>
+    <string name="validity">validity</string>
+    <string name="scan_ticket">Scan ticket.</string>
+    <string name="valid_until">Valid until:</string>
+    <string name="qr_code">QR code</string>
+    <string name="purchased_on">Purchased on:</string>
 </resources>

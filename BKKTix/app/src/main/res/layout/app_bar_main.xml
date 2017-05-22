@@ -27,10 +27,8 @@
                 android:src="@drawable/bkk_logo"
                 android:layout_gravity="right"/>
             </android.support.v7.widget.Toolbar>
-
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
-
 
 </android.support.design.widget.CoordinatorLayout>

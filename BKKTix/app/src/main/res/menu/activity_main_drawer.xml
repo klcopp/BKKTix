@@ -2,14 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <!--<item-->
-            <!--android:id="@+id/nav_account"-->
-            <!--android:icon="@android:drawable/ic_menu_myplaces"-->
-            <!--android:title="@string/account" />-->
-
-        <!--worse alternative icon:-->
-        <!--ic_menu_info_details-->
-
 
         <item
             android:id="@+id/nav_history"

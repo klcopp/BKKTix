@@ -28,14 +28,16 @@
             android:layout_height="80dp"
             android:src="@drawable/grayq"
             android:layout_margin="20dp"
-            android:contentDescription="validity" />
+            android:contentDescription="@string/validity" />
 
         <TextView
             android:id="@+id/codeInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scan ticket."
-            android:textSize="30dp" />
+            android:textColor="@color/colorPurple"
+            android:textStyle="bold"
+            android:text="@string/scan_ticket"
+            android:textSize="30sp" />
 
     </LinearLayout>
 

@@ -22,7 +22,6 @@ import hu.ait.karen.bkktix.data.Ticket;
 
 public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 
-
     public enum HeaderType {
         VALIDATED_TICKETS, _20_MINUTE_TICKETS, _60_MINUTE_TICKETS, _120_MINUTE_TICKETS
     }
@@ -60,7 +59,6 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
                 listDataChildren.get(HeaderType._120_MINUTE_TICKETS).add(ticket);
                 break;
         }
-//        notifyDataSetChanged(); this is apparently unnecessary
     }
 
     public void removeChildOfValidated(int groupPosition, int childPosition) {
@@ -148,7 +146,6 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 
         }
 
-//        String headerTitle = getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

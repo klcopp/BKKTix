@@ -35,14 +35,12 @@ public class TicketViewFragment extends Fragment {
     private int groupPosition;
     private int childPosition;
 
-
     Button btnValidate;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_ticket_view, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.fragment_ticket_view, container, false);
     }
 
     @Override
@@ -80,20 +78,9 @@ public class TicketViewFragment extends Fragment {
             Date validUntil = gcal.getTime();
 
             tvValidatedOrNot.setText(validUntil.toString());
-
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
-            String QRData = sdf.format(validUntil);
-            QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder(QRData, 500);
-            try {
-                Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-                ivQRCode.setImageBitmap(bitmap);
-            } catch (WriterException e) {
-                e.printStackTrace();
-            }
+            genAndSetQRCode(ivQRCode, validUntil);
         }
 
-        //not yet validated
-//        if(ticket.getDateValidated() == null) {
         btnValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,11 +88,19 @@ public class TicketViewFragment extends Fragment {
                         ticket.getTicketType(), groupPosition, childPosition, v);
             }
         });
-//        }
-//        // validated
-//        else{
-//            btnValidate.setVisibility(View.GONE);
-//        }
+    }
+
+    private void genAndSetQRCode(ImageView ivQRCode, Date validUntil) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+        String QRData = sdf.format(validUntil);
+        QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(QRData, null,
+                Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), 500);
+        try {
+            Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+            ivQRCode.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -114,11 +109,6 @@ public class TicketViewFragment extends Fragment {
         if (ticket.getDateValidated() != null) {
             btnValidate.setVisibility(View.GONE);
         }
-    }
-
-    private QRCodeEncoder makeQRCodeEncoder(String data, int size) {
-        return new QRCodeEncoder(data, null,
-                Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), size);
     }
 
     public void sendTicket(Ticket ticket, int groupPosition, int childPosition) {

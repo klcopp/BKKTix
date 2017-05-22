@@ -62,7 +62,8 @@ public class QRReaderFragment extends Fragment {
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this.getActivity(),
                     Manifest.permission.CAMERA)) {
-                Toast.makeText(this.getContext(), "I need Camera", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.getContext(), "Used for scanning tickets.", Toast.LENGTH_SHORT)
+                        .show();
             }
 
             ActivityCompat.requestPermissions(this.getActivity(),
@@ -80,18 +81,18 @@ public class QRReaderFragment extends Fragment {
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_CAMERA_PERMISSION: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    Toast.makeText(this.getContext(), "CAMERA perm granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.getContext(), "CAMERA perm granted", Toast.LENGTH_SHORT)
+                            .show();
                     setupBarcodeDetector();
                     setupCameraSource();
                     startCameraSource();
                 } else {
-                    Toast.makeText(this.getContext(), "CAMERA perm NOT granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.getContext(), "CAMERA perm NOT granted", Toast.LENGTH_SHORT)
+                            .show();
                 }
-                return;
             }
         }
     }
@@ -118,23 +119,19 @@ public class QRReaderFragment extends Fragment {
 
     private void setupBarcodeDetector() {
         barcodeDetector = new BarcodeDetector.Builder(this.getContext())
-                .setBarcodeFormats(Barcode.QR_CODE)
-                .build();
+                .setBarcodeFormats(Barcode.QR_CODE).build();
 
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
-            public void release() {
-
-            }
+            public void release() {}
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
 
                 if (barcodes.size() != 0) {
-                    barcodeInfo.post(new Runnable() {    // Use the post method of the TextView
+                    barcodeInfo.post(new Runnable() {
                         public void run() {
-                            String validity = "INVALID!";
                             Date validThruDate = null;
                             try {
                                 SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
@@ -142,13 +139,7 @@ public class QRReaderFragment extends Fragment {
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
-                            if (validThruDate.getTime() > new Date(System.currentTimeMillis()).getTime()) {
-                                validity = "VALID!";
-                                validityInfo.setImageDrawable(getResources().getDrawable(R.drawable.greencheck));
-                            } else {
-                                validityInfo.setImageDrawable(getResources().getDrawable(R.drawable.redx));
-                            }
-                            barcodeInfo.setText(validity);
+                            barcodeInfo.setText(checkValidity(validThruDate));
                         }
                     });
                 }
@@ -158,7 +149,18 @@ public class QRReaderFragment extends Fragment {
         if (!barcodeDetector.isOperational()) {
             Log.w("TAG_QR", "Detector dependencies are not yet available.");
         }
+    }
 
+    private String checkValidity(Date validThruDate) {
+        String validity;
+        if (validThruDate.getTime() > new Date(System.currentTimeMillis()).getTime()) {
+            validity = "VALID!";
+            validityInfo.setImageDrawable(getResources().getDrawable(R.drawable.greencheck));
+        } else {
+            validityInfo.setImageDrawable(getResources().getDrawable(R.drawable.redx));
+            validity = "INVALID!";
+        }
+        return validity;
     }
 
     private void setupCameraSource() {

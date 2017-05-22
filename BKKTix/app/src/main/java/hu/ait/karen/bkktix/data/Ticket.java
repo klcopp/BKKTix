@@ -9,8 +9,6 @@ public class Ticket {
     private Date datePurchased;
     private Date dateValidated;
 
-//    public Ticket(){this.datePurchased = new Date(System.currentTimeMillis());}
-
     public Ticket(Date datePurchased) {
         this.datePurchased = datePurchased;
     }
@@ -19,11 +17,6 @@ public class Ticket {
         this.datePurchased = datePurchased;
         this.ticketType = ticketType;
     }
-
-//    public Ticket(TicketType ticketType) {
-//        this.datePurchased = new Date(System.currentTimeMillis());
-//        this.ticketType = ticketType;
-//    }
 
     public TicketType getTicketType() {
         return ticketType;

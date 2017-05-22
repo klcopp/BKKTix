@@ -29,7 +29,7 @@ public class MessageFragment extends DialogFragment {
             onMessageFragmentAnswer = (OnMessageFragmentAnswer) context;
         } else {
             throw new RuntimeException(
-                    "This Activity is not implementing the OnMessageFragmentAnswer interface");
+                    "This Activity doesn't implement the OnMessageFragmentAnswer interface");
         }
     }
 
@@ -58,7 +58,6 @@ public class MessageFragment extends DialogFragment {
                 onMessageFragmentAnswer.onNegativeSelected();
             }
         });
-
 
         return alertDialogBuilder.create();
     }

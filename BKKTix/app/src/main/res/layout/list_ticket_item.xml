@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_gravity="center_vertical"
@@ -20,12 +21,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
-        android:paddingLeft="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:paddingTop="5dp"
         android:textSize="17sp"
         android:layout_gravity="center_vertical"
-        android:textColor="@android:color/black"
-
-        android:text="text"/>
+        android:textColor="@android:color/black" />
 
 </LinearLayout>

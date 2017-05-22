@@ -33,7 +33,7 @@ public class VerifyPurchaseMessageFragment extends DialogFragment {
             answer = (VerifyPurchaseMessageFragmentAnswer) context;
         } else {
             throw new RuntimeException(
-                    "This Activity is not implementing the VerifyPurchaseMessageFragmentAnswer" +
+                    "This Activity doesn't implement the VerifyPurchaseMessageFragmentAnswer" +
                             " interface");
         }
     }
@@ -41,22 +41,16 @@ public class VerifyPurchaseMessageFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-
         final int numberOfTickets = getArguments().getInt(MainActivity.KEY_NUMBER_TIX);
         int ticketTypePosition = getArguments().getInt(MainActivity.KEY_TYPE_POSITION);
         final TicketType ticketType = TicketType.fromOrdinal(ticketTypePosition);
 
-
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 getActivity());
-
-
         alertDialogBuilder.setTitle(R.string.sure);
         int minutesValid = MainActivity.getTicketTypeInteger(ticketType);
         alertDialogBuilder.setMessage(
                 String.format(getString(R.string.sure_long), numberOfTickets, minutesValid));
-
 
         alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
@@ -72,7 +66,6 @@ public class VerifyPurchaseMessageFragment extends DialogFragment {
                 answer.onPurchaseCancelledSelected();
             }
         });
-
 
         return alertDialogBuilder.create();
     }

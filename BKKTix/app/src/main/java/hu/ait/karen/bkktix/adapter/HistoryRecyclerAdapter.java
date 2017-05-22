@@ -20,24 +20,16 @@ import hu.ait.karen.bkktix.data.Ticket;
 
 
 public class HistoryRecyclerAdapter
-        extends RecyclerView.Adapter<HistoryRecyclerAdapter.ViewHolder>
-
-{
+        extends RecyclerView.Adapter<HistoryRecyclerAdapter.ViewHolder> {
 
     private List<Ticket> ticketHistoryList;
     private Context context;
 
-
     public HistoryRecyclerAdapter(Context context) {
         this.context = context;
 
-
         ticketHistoryList = new ArrayList<Ticket>();
-
-        //test:
-//        ticketHistoryList.add(new Ticket(new Date(System.currentTimeMillis())));
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,62 +55,20 @@ public class HistoryRecyclerAdapter
         return ticketHistoryList.size();
     }
 
-//        @Override
-//        public void onItemDismiss(int position) {
-//            EstimatedPriceTotal.getInstance().subtractFromEstimatedTotalPrice(Double.parseDouble(todoList.get(position).getEstimatedPriceString()));
-//
-////            realmTodo.beginTransaction();
-////            ticketHistoryList.get(position).deleteFromRealm();
-////            realmTodo.commitTransaction();
-//
-//
-//            ticketHistoryList.remove(position);
-//
-////             refreshes the whole list
-////            notifyDataSetChanged();
-////             refreshes just the relevant part that has been deleted
-//
-//            notifyItemRemoved(position);
-//        }
-
-//        @Override
-//        public void onItemMove(int fromPosition, int toPosition) {
-//        /*todoList.add(toPosition, todoList.get(fromPosition));
-//        todoList.remove(fromPosition);*/
-//
-//            if (fromPosition < toPosition) {
-//                for (int i = fromPosition; i < toPosition; i++) {
-//                    Collections.swap(todoList, i, i + 1);
-//                }
-//            } else {
-//                for (int i = fromPosition; i > toPosition; i--) {
-//                    Collections.swap(todoList, i, i - 1);
-//                }
-//            }
-//
-//
-//            notifyItemMoved(fromPosition, toPosition);
-//        }
-
     public void addHistoricalTicket(Ticket ticket) {
 
         ticketHistoryList.add(0, ticket);
         notifyItemInserted(0);
     }
 
-
     public void deleteAll() {
-
         ticketHistoryList.clear();
         notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
-
         private TextView tvDateUsed;
         private TextView tvDatePurchased;
-
 
         public ViewHolder(View itemView) {
             super(itemView);

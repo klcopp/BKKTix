@@ -5,8 +5,6 @@
     android:padding="15dp"
     android:background="@color/colorPurple">
 
-
-    <!--android:layout_width="fill_parent"-->
     <TextView
         android:id="@+id/tvListHeader"
         android:layout_width="wrap_content"

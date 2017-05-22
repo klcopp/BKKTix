@@ -16,7 +16,8 @@
         android:id="@+id/ivQRCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTicketType"/>
+        android:layout_below="@+id/tvTicketType"
+        android:contentDescription="@string/qr_code" />
 
     <LinearLayout
         android:id="@+id/validUntil"
@@ -28,10 +29,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="4dp"
+            android:paddingEnd="4dp"
             android:textStyle="bold"
             android:textColor="@color/colorDarkPurple"
-            android:text="Valid until: " />
+            android:text="@string/valid_until" />
         <TextView
             android:id="@+id/tvValidatedOrNot"
             android:layout_width="wrap_content"
@@ -48,10 +49,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="4dp"
+        android:paddingEnd="4dp"
         android:textStyle="bold"
         android:textColor="@color/colorDarkPurple"
-        android:text="Purchased on: " />
+        android:text="@string/purchased_on" />
     <TextView
         android:id="@+id/tvTicketDate"
         android:layout_width="wrap_content"

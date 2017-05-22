@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity
         newTVFragment.sendTicket(ticket, groupPosition, childPosition);
         showFragment(newTVFragment, TicketViewFragment.TAG);
         setToolbarTitle(R.string.ticket);
-
     }
 
     private void showMyTixFragment() {
@@ -180,30 +179,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    //In case we want an extra menu:
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
-
     private void setUpNavigationView() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -232,12 +207,8 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
-//        if (id == R.id.nav_account) {
-//        } else
         if (id == R.id.nav_history) {
             showHistoryFragment();
         } else if (id == R.id.nav_help) {

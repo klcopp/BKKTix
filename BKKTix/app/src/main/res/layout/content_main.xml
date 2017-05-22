@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context="hu.ait.karen.bkktix.MainActivity">
 
-    <!--there are two framelayouts here, that's a lot -->
     <FrameLayout
         android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/content"
@@ -19,9 +18,7 @@
         <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </FrameLayout>
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
 
