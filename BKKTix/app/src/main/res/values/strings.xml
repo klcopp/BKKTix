@@ -30,18 +30,32 @@
     <string name="validate_ticket">Validate Ticket</string>
     <string name="ticket_validated">Ticket validated</string>
 
-    <string name="about">This app was written by Karen Coppage and Maddie Lansbury,
-        without the permission of BKK.\n\n\n
-        Riding without a valid ticket may result in a penalty fee.\n\n\n
-        Conditions of penalty fare payment\n\n1. Penalty fare paid on the spot\n\n
-        If you pay the penalty fare in cash on the spot, the amount to be paid decreases to HUF 8,000. The ticket inspector must provide you with a receipt for the on-the-spot payment.\n
-        \n2. Retrospective payment of on-the-spot penalty fare\n
-        The on-the-spot penalty fare (HUF 8,000) can be settled retrospectively via cash or credit card payment at one of the following locations: Penalty Fare Office (Budapest, District 7, Akácfa u. 22), Main Customer Service Centre (Budapest, District 7, Rumbach Sebestyén utca 19-21), Kelenföld vasútállomás Metro Station Customer Service Centre (Budapest, District 11, Kelenföld railway station underpass) or Széll Kálmán tér Customer Service Centre (Buda, District 2) within 2 working days after surcharging. You will receive an incoming payment document certifying your payment.\n
-        \n3. Presentation of the pass and cash or bankcard payment at one of the following locations: \n\n
-        Penalty Fare Office (Budapest, District 7, Akácfa u. 22), Main Customer Service Centre (Budapest, District 7, Rumbach Sebestyén utca 19-21), Kelenföld vasútállomás Metro Station Customer Service Centre (Budapest, District 11, Kelenföld railway station underpass) or Széll Kálmán tér Customer Service Centre (Buda, District 2)\n
+    <string name="about">
+        <![CDATA[
+        <i>This app was written by Karen Coppage and Maddie Lansbury,
+        without the permission of BKK.</i><br/><br/><br/>
+        Riding without a valid ticket may result in a penalty fee.<br/><br/>
+        <big><b><font color="#57275e">Conditions of penalty fare payment</font></b></big><br/><br/>
+        <b>1. Penalty fare paid on the spot</b><br/>
+        If you pay the penalty fare in <b>cash on the spot, the amount to be paid decreases to HUF
+        8,000.</b>The ticket inspector must provide you with a receipt for the on-the-spot payment.
+        <br/><br/>
+        <b>2. Retrospective payment of on-the-spot penalty fare</b><br/>
+        The on-the-spot penalty fare (HUF 8,000) can be settled retrospectively via cash or credit
+        card payment at one of the following locations: <b>Penalty Fare Office</b> (Budapest,
+        District 7,Akácfa u. 22), <b>Main Customer Service Centre</b> (Budapest, District 7, Rumbach
+        Sebestyén utca 19-21), <b>Kelenföld vasútállomás Metro Station Customer Service Centre</b>
+        (Budapest, District 11, Kelenföld railway station underpass) or <b>Széll Kálmán tér Customer
+        Service Centre</b> (Buda, District 2) within 2 working days after surcharging. You will
+        receive an incoming payment document certifying your payment.<br/><br/>
+        <b>3. Presentation of the pass and cash or bankcard payment at one of the following
+        locations:</b><br/>
+        <b>Penalty Fare Office</b> (Budapest, District 7, Akácfa u. 22), <b>Main Customer Service
+        Centre</b> (Budapest, District 7, Rumbach Sebestyén utca 19-21), <b>Kelenföld vasútállomás
+        Metro Station Customer Service Centre</b> (Budapest, District 11, Kelenföld railway station
+        underpass) or <b>Széll Kálmán tér Customer Service Centre</b> (Buda, District 2)<br/><br/>
         You will receive an incoming payment document certifying your payment.
-
-
+        ]]>
     </string>
     <string name="cancelled">Purchase cancelled.</string>
     <string name="about_title">About</string>
