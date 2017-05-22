@@ -17,6 +17,7 @@ import android.view.View;
 
 import android.widget.Toast;
 
+import java.security.GeneralSecurityException;
 import java.util.Date;
 
 import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
@@ -46,6 +47,12 @@ public class MainActivity extends AppCompatActivity
     private TicketType tempTicketType;
     private int tempGroupPosition;
     private int tempChildPosition;
+
+    public String getKeyStr() {
+        return keyStr;
+    }
+
+    private String keyStr;
 
 
 
