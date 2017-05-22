@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -80,7 +81,8 @@ public class TicketViewFragment extends Fragment {
 
             tvValidatedOrNot.setText("Valid until: " + validUntil);
 
-            String QRData = validUntil.toString();
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+            String QRData = sdf.format(validUntil);
             QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder(QRData, 500);
             try {
                 Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();

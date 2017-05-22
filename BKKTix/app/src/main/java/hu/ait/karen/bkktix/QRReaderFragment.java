@@ -138,7 +138,7 @@ public class QRReaderFragment extends Fragment {
                             String validity = "INVALID!";
                             Date validThruDate = null;
                             try {
-                                SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", new Locale("us"));
+                                SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
                                 validThruDate = sdf.parse(barcodes.valueAt(0).displayValue);
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();

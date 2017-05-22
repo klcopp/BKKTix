@@ -3,28 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#c42b2b"
+    android:background="@color/colorBackgroundGray"
+    android:weightSum="5"
+    android:padding="15dp"
     >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="QR Reader"
-        android:textSize="56dp" />
-
-    <ImageView
-        android:id="@+id/qrCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
     <hu.ait.karen.bkktix.camera.CameraSourcePreview
         android:id="@+id/cameraSourcePreview"
-        android:layout_width="320dp"
-        android:layout_height="320dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_weight="4"/>
 
     <TextView
         android:id="@+id/codeInfo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Read a ticket."
+        android:textSize="40dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>
