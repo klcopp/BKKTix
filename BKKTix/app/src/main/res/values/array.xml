@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ticket_types_array">
+        <item>Ticket for 20 minutes</item>
+        <item>Ticket for 60 minutes</item>
+        <item>Ticket for 120 minutes</item>
+    </string-array>
+</resources>

@@ -25,16 +25,27 @@ import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.data.TicketType;
 import hu.ait.karen.bkktix.dialog.MessageFragment;
 import hu.ait.karen.bkktix.dialog.OnMessageFragmentAnswer;
+import hu.ait.karen.bkktix.dialog.VerifyPurchaseMessageFragment;
+import hu.ait.karen.bkktix.dialog.VerifyPurchaseMessageFragmentAnswer;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        OnMessageFragmentAnswer {
+        OnMessageFragmentAnswer, VerifyPurchaseMessageFragmentAnswer {
 
-    public static final String MESSAGE_FRAGMENT_TAG = "MessageFragment";
+
     public static final java.lang.String KEY_EXP = "KEY_EXPIRATION";
     public static final int TWENTY = 20;
     public static final int SIXTY = 60;
     public static final int ONE_HUNDRED_TWENTY = 120;
+    public static final String KEY_USERNAME = "KEY_USERNAME";
+    public static final String KEY_CREDIT_CARD_NUMBER = "KEY_CREDIT_CARD_NUMBER";
+    public static final String KEY_ADDRESS1 = "KEY_ADDRESS1";
+    public static final String KEY_CITY_STATE = "KEY_CITY_STATE";
+    public static final String KEY_COUNTRY = "KEY_COUNTRY";
+    public static final String KEY_TYPE_POSITION = "KEY_TYPE_POSITION";
+    public static final String KEY_NUMBER_TIX = "KEY_NUMBER_TIX";
+
+
     private FragmentManager fragmentManager;
     private MyTixFragment myTixFragment;
     private MyTixExpandableListAdapter listAdapter;
@@ -49,7 +60,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private String keyStr;
-
 
 
     @Override
@@ -139,7 +149,7 @@ public class MainActivity extends AppCompatActivity
         ft.commit();
     }
 
-    private void setToolbarTitle(int id){
+    private void setToolbarTitle(int id) {
         getSupportActionBar().setTitle(getString(id));
     }
 
@@ -173,7 +183,6 @@ public class MainActivity extends AppCompatActivity
 //    }
 
 
-
     private void setUpNavigationView() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -186,17 +195,15 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.END)) {
             drawer.closeDrawer(GravityCompat.END);
         } else {
-            if(currentFragment.equals(MyTixFragment.TAG)) {
+            if (currentFragment.equals(MyTixFragment.TAG)) {
                 super.onBackPressed();
-            }
-            else{
+            } else {
                 showMyTixFragment();
             }
         }
@@ -210,7 +217,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_account) {
         } else if (id == R.id.nav_history) {
-        }else if (id == R.id.nav_help) {
+        } else if (id == R.id.nav_help) {
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -224,10 +231,10 @@ public class MainActivity extends AppCompatActivity
 
         MessageFragment messageFragment = new MessageFragment();
         messageFragment.setCancelable(false);
-        
+
         Bundle bundle = new Bundle();
         int minutesToExp = getTicketTypeInteger(ticketType);
-        bundle.putInt(KEY_EXP,minutesToExp);
+        bundle.putInt(KEY_EXP, minutesToExp);
         messageFragment.setArguments(bundle);
 
         //store ticket info here in MainActivity
@@ -237,11 +244,15 @@ public class MainActivity extends AppCompatActivity
 
 
         messageFragment.show(getSupportFragmentManager(),
-                MESSAGE_FRAGMENT_TAG);
+                MessageFragment.TAG);
     }
 
     @Override
     public void onPositiveSelected() {
+
+        //TODO make QR code
+
+
         ((Ticket) listAdapter.getChild(tempGroupPosition, tempChildPosition)).
                 setDateValidated(new Date(System.currentTimeMillis()));
         listAdapter.moveTicketToValidated(tempTicketType, tempGroupPosition, tempChildPosition);
@@ -254,8 +265,8 @@ public class MainActivity extends AppCompatActivity
     public void onNegativeSelected() {
     }
 
-    static int getTicketTypeInteger (TicketType ticketType) {
-        switch (ticketType){
+    public static int getTicketTypeInteger(TicketType ticketType) {
+        switch (ticketType) {
             case _20_MINUTES:
                 return TWENTY;
             case _60_MINUTES:
@@ -265,4 +276,46 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void verifyPurchase(int spinnerTicketTypePosition, int numberOfTickets, String userName,
+                               String creditCardNumber, String securityCode, String address1,
+                               String cityState, String country) {
+        VerifyPurchaseMessageFragment verifyFragment = new VerifyPurchaseMessageFragment();
+        verifyFragment.setCancelable(false);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_USERNAME, userName);
+        bundle.putString(KEY_CREDIT_CARD_NUMBER, creditCardNumber);
+        bundle.putString(KEY_ADDRESS1, address1);
+        bundle.putString(KEY_CITY_STATE, cityState);
+        bundle.putString(KEY_COUNTRY, country);
+        bundle.putInt(KEY_TYPE_POSITION, spinnerTicketTypePosition);
+        bundle.putInt(KEY_NUMBER_TIX, numberOfTickets);
+        verifyFragment.setArguments(bundle);
+
+
+//        //store ticket info here in MainActivity
+//        tempTicketType = ticketType;
+//        tempGroupPosition = groupPosition;
+//        tempChildPosition = childPosition;
+
+
+        verifyFragment.show(getSupportFragmentManager(),
+                VerifyPurchaseMessageFragment.TAG);
+
+    }
+
+    @Override
+    public void onPurchaseSelected(TicketType ticketType, int numberOfTickets) {
+        for (int i = 0; i < numberOfTickets; i++) {
+            addNewTicket(ticketType);
+        }
+        showMyTixFragment();
+
+    }
+
+    @Override
+    public void onPurchaseCancelledSelected() {
+
+        showMyTixFragment();
+    }
 }

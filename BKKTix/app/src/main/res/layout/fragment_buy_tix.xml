@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,41 +7,134 @@
     app:theme="@style/AppTheme"
     android:background="@color/colorBackgroundGray">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buy Tix"
-        android:textSize="56dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20 minutes:"/>
+        android:layout_alignStart="@+id/etUserName"
+        android:text="Type of Ticket:"
+        android:layout_above="@+id/ticketTypeSpinner"
+        />
+    <Spinner
+        android:layout_marginTop="50dp"
+        android:id="@+id/ticketTypeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/etAddress1"
+        android:layout_alignStart="@+id/etUserName" />
+
+    <NumberPicker
+        android:id="@+id/npTicketAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+
+        >
+
+    </NumberPicker>
+
+    <EditText
+        android:id="@+id/etUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Name on credit card"
+        android:layout_marginTop="170dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="25dp"
+        android:layout_toStartOf="@+id/npTicketAmount" />
+    <!--TODO STRINGS ^-->
+
+    <EditText
+        android:id="@+id/etCardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:hint="Card Number"
+        android:layout_below="@+id/etUserName"
+        android:layout_alignStart="@+id/etUserName"
+        android:layout_alignEnd="@+id/npTicketAmount" />
+
+    <EditText
+        android:id="@+id/etSecurityCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:hint="Security Code"
+        android:layout_below="@+id/etCardNumber"
+        android:layout_alignStart="@+id/etCardNumber"
+        />
+
+    <EditText
+        android:id="@+id/etAddress1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Address Line 1"
+        android:layout_below="@+id/etSecurityCode"
+        android:layout_alignStart="@+id/etSecurityCode"
+        android:layout_toStartOf="@+id/btnBuy" />
+
+    <EditText
+        android:id="@+id/etCityState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="City (and State)"
+        android:layout_below="@+id/etAddress1"
+        android:layout_alignStart="@+id/etAddress1"
+        android:layout_alignEnd="@+id/etAddress1" />
+
+    <EditText
+        android:id="@+id/etCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Country"
+        android:layout_above="@+id/btnBuy"
+        android:layout_alignStart="@+id/etCityState"
+        android:layout_toStartOf="@+id/btnBuy" />
 
     <Button
-        android:id="@+id/btnBuy20Min"
+        android:id="@+id/btnBuy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="33dp"
+
         android:text="@string/buy"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="60 minutes:"/>
-    <Button
-        android:id="@+id/btnBuy60Min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/buy"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="120 minutes:"/>
-    <Button
-        android:id="@+id/btnBuy120Min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/buy"/>
 
-</LinearLayout>
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="20 minutes:"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btnBuy20Min"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/buy"/>-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="60 minutes:"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/btnBuy60Min"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/buy"/>-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="120 minutes:"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/btnBuy120Min"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/buy"/>-->
+
+</RelativeLayout>

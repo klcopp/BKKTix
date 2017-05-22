@@ -19,6 +19,7 @@ import hu.ait.karen.bkktix.R;
 public class MessageFragment extends DialogFragment {
 
     private OnMessageFragmentAnswer onMessageFragmentAnswer = null;
+    public static final String TAG = "MessageFragment";
 
     @Override
     public void onAttach(Context context) {
@@ -28,8 +29,7 @@ public class MessageFragment extends DialogFragment {
             onMessageFragmentAnswer = (OnMessageFragmentAnswer) context;
         } else {
             throw new RuntimeException(
-                    "This Activity is not implementing the " +
-                            "OnMessageFragmentAnswer interface");
+                    "This Activity is not implementing the OnMessageFragmentAnswer interface");
             //TODO ^STRING
         }
     }
