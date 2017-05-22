@@ -73,12 +73,7 @@ public class VerifyPurchaseMessageFragment extends DialogFragment {
         int minutesValid =  MainActivity.getTicketTypeInteger(ticketType);
         alertDialogBuilder.setMessage(
                 "Are you sure you want to buy " + numberOfTickets + " tickets? " +
-                        "They will be valid for " + minutesValid +" minutes.\n\n"+
-                        "Charge to:\n"+
-                        userName + "\n"+
-                        address1 + "\n"+
-                        cityState + "\n"+
-                        country + "\n");
+                        "They will be valid for " + minutesValid +" minutes.\n\n");
 //                String.format(getString(R.string.are_you_sure), minutesTillExpiration));
 
 

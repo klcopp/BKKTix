@@ -303,18 +303,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void verifyPurchase(int spinnerTicketTypePosition, int numberOfTickets, String userName,
-                               String creditCardNumber, String securityCode, String address1,
-                               String cityState, String country) {
+    public void verifyPurchase(int spinnerTicketTypePosition, int numberOfTickets) {
         VerifyPurchaseMessageFragment verifyFragment = new VerifyPurchaseMessageFragment();
         verifyFragment.setCancelable(false);
 
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_USERNAME, userName);
-        bundle.putString(KEY_CREDIT_CARD_NUMBER, creditCardNumber);
-        bundle.putString(KEY_ADDRESS1, address1);
-        bundle.putString(KEY_CITY_STATE, cityState);
-        bundle.putString(KEY_COUNTRY, country);
         bundle.putInt(KEY_TYPE_POSITION, spinnerTicketTypePosition);
         bundle.putInt(KEY_NUMBER_TIX, numberOfTickets);
         verifyFragment.setArguments(bundle);
