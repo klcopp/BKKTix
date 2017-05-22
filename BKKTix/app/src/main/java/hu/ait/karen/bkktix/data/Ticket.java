@@ -3,11 +3,15 @@ package hu.ait.karen.bkktix.data;
 
 import java.util.Date;
 
-public class Ticket {
+import io.realm.RealmObject;
+
+public class Ticket extends RealmObject {
 
     private TicketType ticketType;
     private Date datePurchased;
     private Date dateValidated;
+
+    public Ticket(){}
 
     public Ticket(Date datePurchased){
         this.datePurchased = datePurchased;

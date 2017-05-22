@@ -1,4 +1,4 @@
-package hu.ait.karen.bkktix;
+package hu.ait.karen.bkktix.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import hu.ait.karen.bkktix.MainActivity;
+import hu.ait.karen.bkktix.R;
 import hu.ait.karen.bkktix.data.TicketType;
 
 

@@ -15,6 +15,8 @@ import android.widget.TextView;
 import hu.ait.karen.bkktix.R;
 import hu.ait.karen.bkktix.data.TicketType;
 import hu.ait.karen.bkktix.data.Ticket;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * source: http://www.androidhive.info/2013/07/android-expandable-list-view-tutorial/
@@ -29,10 +31,17 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private List<HeaderType> listDataHeaders;
     private HashMap<HeaderType, List<Ticket>> listDataChildren;
+    private Realm realmBKK;
 
 
     public MyTixExpandableListAdapter(Context context) {
         this._context = context;
+
+        realmBKK = Realm.getDefaultInstance();
+        RealmResults<Ticket> ticketRealmResults =
+                realmBKK.where(Ticket.class).findAll();
+
+
         listDataHeaders = new ArrayList<HeaderType>();
         for (HeaderType headerType : HeaderType.values()
                 ) {
@@ -47,6 +56,12 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     public void addChild(Ticket ticket) {
+
+        //TODO but i don't wnat to make a new thing
+//        realmBKK.beginTransaction();
+//        Ticket newTicket = realmBKK.createObject(Ticket.class);
+//        realmBKK.commitTransaction();
+
         TicketType type = ticket.getTicketType();
         switch (type) {
             case _20_MINUTES:
@@ -62,6 +77,18 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 //        notifyDataSetChanged(); this is apparently unnecessary
     }
 
+
+    public void removeChild(int groupPosition, int childPosition){
+
+        //TODO
+//        realmBKK.beginTransaction();
+//        ((Ticket) getChild(groupPosition,childPosition)).deleteFromRealm(); // idk if this would work
+//        realmBKK.commitTransaction();
+
+        this.listDataChildren.get(this.listDataHeaders.get(groupPosition)).remove(childPosition);
+    }
+
+
     public void moveTicketToValidated(TicketType ticketType, int groupPosition, int childPosition) {
         listDataChildren.get(HeaderType.VALIDATED_TICKETS).add(
                 (Ticket) getChild(groupPosition, childPosition));
@@ -71,9 +98,9 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 
 
     @Override
-    public Object getChild(int groupPosition, int childPosititon) {
+    public Object getChild(int groupPosition, int childPosition) {
         return this.listDataChildren.get(this.listDataHeaders.get(groupPosition))
-                .get(childPosititon);
+                .get(childPosition);
     }
 
     @Override
@@ -179,4 +206,7 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
 
+    public void closeRealm() {
+        realmBKK.close();
+    }
 }

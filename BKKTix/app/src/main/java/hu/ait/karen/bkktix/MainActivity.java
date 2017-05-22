@@ -24,6 +24,10 @@ import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.data.TicketType;
 import hu.ait.karen.bkktix.dialog.MessageFragment;
 import hu.ait.karen.bkktix.dialog.OnMessageFragmentAnswer;
+import hu.ait.karen.bkktix.fragment.BuyTixFragment;
+import hu.ait.karen.bkktix.fragment.MyTixFragment;
+import hu.ait.karen.bkktix.fragment.QRReaderFragment;
+import hu.ait.karen.bkktix.fragment.TicketViewFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -256,6 +260,12 @@ public class MainActivity extends AppCompatActivity
             default:
                 return ONE_HUNDRED_TWENTY;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        listAdapter.closeRealm();
     }
 
 }

@@ -1,4 +1,4 @@
-package hu.ait.karen.bkktix;
+package hu.ait.karen.bkktix.fragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -25,6 +25,7 @@ import com.google.zxing.WriterException;
 
 import java.io.IOException;
 
+import hu.ait.karen.bkktix.R;
 import hu.ait.karen.bkktix.camera.CameraSourcePreview;
 import hu.ait.karen.bkktix.qr.Contents;
 import hu.ait.karen.bkktix.qr.QRCodeEncoder;
