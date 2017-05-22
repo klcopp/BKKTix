@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context="hu.ait.karen.bkktix.MainActivity">
 
-    <!--TODO there are two framelayouts here, that's a lot -->
+    <!--there are two framelayouts here, that's a lot -->
     <FrameLayout
         android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/content"

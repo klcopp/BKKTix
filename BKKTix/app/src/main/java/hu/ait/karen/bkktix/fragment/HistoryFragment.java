@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import hu.ait.karen.bkktix.MainActivity;
 import hu.ait.karen.bkktix.R;
 import hu.ait.karen.bkktix.adapter.HistoryRecyclerAdapter;
 
@@ -34,8 +35,7 @@ public class HistoryFragment extends Fragment {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerHistory.setLayoutManager(layoutManager);
 
-        historyRecyclerAdapter = new HistoryRecyclerAdapter(getActivity()
-                /*,  ((MainApplication) getApplication()).getRealmTodo()*/);
+        historyRecyclerAdapter = ((MainActivity) getActivity()).getHistoryRecyclerAdapter();
         recyclerHistory.setAdapter(historyRecyclerAdapter);
 
         return rootView;

@@ -1,4 +1,5 @@
 package hu.ait.karen.bkktix.fragment;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -51,9 +52,6 @@ public class QRReaderFragment extends Fragment {
         preview = (CameraSourcePreview) rootView.findViewById(R.id.cameraSourcePreview);
 
         requestNeededPermission();
-
-
-
         return rootView;
     }
 
@@ -97,9 +95,6 @@ public class QRReaderFragment extends Fragment {
             }
         }
     }
-
-
-
 
 
     @Override
@@ -147,8 +142,7 @@ public class QRReaderFragment extends Fragment {
                             } catch (java.text.ParseException e) {
                                 e.printStackTrace();
                             }
-                            if (validThruDate.getTime() > new Date(System.currentTimeMillis()).getTime())
-                            {
+                            if (validThruDate.getTime() > new Date(System.currentTimeMillis()).getTime()) {
                                 validity = "VALID!";
                                 validityInfo.setImageDrawable(getResources().getDrawable(R.drawable.greencheck));
                             } else {

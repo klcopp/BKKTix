@@ -22,6 +22,7 @@ import hu.ait.karen.bkktix.data.Ticket;
 
 public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 
+
     public enum HeaderType {
         VALIDATED_TICKETS, _20_MINUTE_TICKETS, _60_MINUTE_TICKETS, _120_MINUTE_TICKETS
     }
@@ -62,6 +63,12 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 //        notifyDataSetChanged(); this is apparently unnecessary
     }
 
+    public void removeChildOfValidated(int groupPosition, int childPosition) {
+        listDataChildren.get(HeaderType.VALIDATED_TICKETS).remove(childPosition);
+        notifyDataSetChanged();
+
+    }
+
     public void moveTicketToValidated(TicketType ticketType, int groupPosition, int childPosition) {
         listDataChildren.get(HeaderType.VALIDATED_TICKETS).add(
                 (Ticket) getChild(groupPosition, childPosition));
@@ -96,9 +103,7 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
 
         Ticket childName = (Ticket) getChild(groupPosition, childPosition);
 
-        //TODO change, and extract string resource
-        txtListChild.setText("Bought at: " +
-                childName.getDatePurchased().toString());
+        txtListChild.setText(String.format(_context.getString(R.string.bought_at), childName.getDatePurchased().toString()));
         return convertView;
     }
 
@@ -138,13 +143,9 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
             case _60_MINUTE_TICKETS:
                 headerTitle = _context.getString(R.string.new_60_min_tix);
                 break;
-            case _120_MINUTE_TICKETS:
+            default: // 120 minutes
                 headerTitle = _context.getString(R.string.new_120_min_tix);
-                break;
-            default:
-                headerTitle = "idk";
 
-                //TODO STRING^
         }
 
 //        String headerTitle = getGroup(groupPosition);
@@ -162,8 +163,8 @@ public class MyTixExpandableListAdapter extends BaseExpandableListAdapter {
         TextView tvNumberTickets = (TextView) convertView.findViewById(R.id.tvNumberTickets);
         tvNumberTickets.setTypeface(null, Typeface.BOLD);
 
-        tvNumberTickets.setText("" + getChildrenCount(groupPosition));
-//        TODO ^STRING
+        tvNumberTickets.setText(String.format(_context.getString(R.string.integer),
+                getChildrenCount(groupPosition)));
 
         return convertView;
     }

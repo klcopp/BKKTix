@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--TODO delete all the standins-->
-
     <ImageView
         android:id="@+id/ivQRCode"
         android:layout_width="wrap_content"
@@ -19,8 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ivQRCode"
         android:layout_centerHorizontal="true"
-
-        android:text="@string/validate"/>
+        android:text="@string/validate" />
 
     <TextView
         android:id="@+id/tvValidatedOrNot"
@@ -28,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnValidate"
         android:layout_centerHorizontal="true"
-
         />
 
     <TextView
@@ -37,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvValidatedOrNot"
         android:layout_centerHorizontal="true"
-
         />
 
     <TextView
@@ -46,11 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTicketType"
         android:layout_centerHorizontal="true"
-
         />
-
-
-
 
 
 </RelativeLayout>

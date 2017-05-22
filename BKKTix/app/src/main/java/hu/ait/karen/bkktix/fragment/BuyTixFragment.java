@@ -53,8 +53,7 @@ public class BuyTixFragment extends Fragment {
         });
 
 
-
-//  Dummy button:
+//  Dummy buttons:
 
 //        Button btnBuy20Min = (Button) rootView.findViewById(R.id.btnBuy20Min);
 //        btnBuy20Min.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +78,6 @@ public class BuyTixFragment extends Fragment {
 //                ((MainActivity) getActivity()).addNewTicket(TicketType._120_MINUTES);
 //            }
 //        });
-
 
         return rootView;
     }

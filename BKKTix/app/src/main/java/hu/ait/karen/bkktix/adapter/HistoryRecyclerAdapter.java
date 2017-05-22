@@ -1,6 +1,7 @@
 package hu.ait.karen.bkktix.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,50 +20,46 @@ import hu.ait.karen.bkktix.data.Ticket;
 
 
 public class HistoryRecyclerAdapter
-            extends RecyclerView.Adapter<HistoryRecyclerAdapter.ViewHolder>
+        extends RecyclerView.Adapter<HistoryRecyclerAdapter.ViewHolder>
 
-    {
+{
 
-        private List<Ticket> ticketHistoryList;
-        private Context context;
-
-//        private Realm realmTodo;
+    private List<Ticket> ticketHistoryList;
+    private Context context;
 
 
-        public HistoryRecyclerAdapter(Context context /*, Realm realmTodo*/) {
+    public HistoryRecyclerAdapter(Context context) {
         this.context = context;
-//            this.realmTodo = realmTodo;
 
-//        realmTodo = Realm.getDefaultInstance();
-
-//            RealmResults<Todo> todoResult =
-//                    realmTodo.where(Todo.class).findAll();
 
         ticketHistoryList = new ArrayList<Ticket>();
 
-//            for (int i = 0; i < todoResult.size(); i++) {
-//                todoList.add(todoResult.get(i));
-//            }
+        //test:
+//        ticketHistoryList.add(new Ticket(new Date(System.currentTimeMillis())));
     }
 
 
-        @Override
-        public ViewHolder onCreateViewHolder (ViewGroup parent,int viewType){
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.list_history_ticket, parent, false);
 
         return new ViewHolder(rowView);
     }
 
-        @Override
-        public void onBindViewHolder ( final ViewHolder holder, int position){
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         Ticket ticket = ticketHistoryList.get(position);
-        holder.tvDateUsed.setText(ticket.getDateValidated().toString());
-        holder.tvDatePurchased.setText(ticket.getDatePurchased().toString());
+        if (ticket.getDateValidated() != null) {
+            holder.tvDateUsed.setText(String.format(context.getString(R.string.date_used),
+                    ticket.getDateValidated().toString()));
+        }
+        holder.tvDatePurchased.setText(String.format(context.getString(R.string.date_purchased),
+                ticket.getDatePurchased().toString()));
     }
 
-        @Override
-        public int getItemCount () {
+    @Override
+    public int getItemCount() {
         return ticketHistoryList.size();
     }
 
@@ -103,12 +101,6 @@ public class HistoryRecyclerAdapter
 //        }
 
     public void addHistoricalTicket(Ticket ticket) {
-//            realmTodo.beginTransaction();
-//            _Todo newTodo = realmTodo.createObject(_Todo.class, UUID.randomUUID().toString());
-//            newTodo.setTodoText(todoTitle);
-//            //set other things here
-
-//            realmTodo.commitTransaction();
 
         ticketHistoryList.add(0, ticket);
         notifyItemInserted(0);
@@ -116,9 +108,6 @@ public class HistoryRecyclerAdapter
 
 
     public void deleteAll() {
-//            realmTodo.beginTransaction();
-//            realmTodo.deleteAll();
-//            realmTodo.commitTransaction();
 
         ticketHistoryList.clear();
         notifyDataSetChanged();
@@ -140,9 +129,5 @@ public class HistoryRecyclerAdapter
         }
     }
 
-//
-//        public void closeRealm() {
-//            realmTodo.close();
-//        }
 }
 

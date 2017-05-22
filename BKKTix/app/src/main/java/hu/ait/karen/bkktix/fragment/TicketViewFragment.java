@@ -28,14 +28,12 @@ import hu.ait.karen.bkktix.qr.Contents;
 import hu.ait.karen.bkktix.qr.QRCodeEncoder;
 
 
-
 public class TicketViewFragment extends Fragment {
 
     public static final String TAG = "TicketViewFragment";
     private Ticket ticket;
     private int groupPosition;
     private int childPosition;
-
 
 
     Button btnValidate;
@@ -96,13 +94,13 @@ public class TicketViewFragment extends Fragment {
 
         //not yet validated
 //        if(ticket.getDateValidated() == null) {
-            btnValidate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((MainActivity) getActivity()).showValidateTicketDialog(
-                            ticket.getTicketType(), groupPosition, childPosition, v);
-                }
-            });
+        btnValidate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).showValidateTicketDialog(
+                        ticket.getTicketType(), groupPosition, childPosition, v);
+            }
+        });
 //        }
 //        // validated
 //        else{
@@ -113,7 +111,7 @@ public class TicketViewFragment extends Fragment {
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if(ticket.getDateValidated() != null){
+        if (ticket.getDateValidated() != null) {
             btnValidate.setVisibility(View.GONE);
         }
     }

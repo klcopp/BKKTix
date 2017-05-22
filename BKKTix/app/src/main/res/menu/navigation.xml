@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/nav_myTix"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ticket_icon"
         android:title="@string/my_tix" />
 
     <item

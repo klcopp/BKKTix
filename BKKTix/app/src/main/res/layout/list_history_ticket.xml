@@ -3,19 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/colorBackgroundGray">
+    android:padding="10dp"
+    android:dividerPadding="5dp"
+    android:background="@color/colorVeryLightPurple">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/used_ticket"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"/>
     <TextView
         android:id="@+id/tvDateUsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
 
-        android:text="Date Used:" />
+        android:text="@string/date_used" />
 
     <TextView
         android:id="@+id/tvDatePurchased"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date Purchased:" />
+        android:textColor="@android:color/black"
+        android:text="@string/date_purchased" />
 
 </LinearLayout>

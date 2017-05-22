@@ -30,7 +30,6 @@ public class MessageFragment extends DialogFragment {
         } else {
             throw new RuntimeException(
                     "This Activity is not implementing the OnMessageFragmentAnswer interface");
-            //TODO ^STRING
         }
     }
 
@@ -41,11 +40,6 @@ public class MessageFragment extends DialogFragment {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 getActivity());
-
-//        LayoutInflater inflater = LayoutInflater.from(getContext());
-//        View dialogLayout = inflater.inflate(R.layout.layout_dialog,null);
-//        alertDialogBuilder.setView(dialogLayout);
-
 
         alertDialogBuilder.setTitle(R.string.validate_ticket);
         alertDialogBuilder.setMessage(

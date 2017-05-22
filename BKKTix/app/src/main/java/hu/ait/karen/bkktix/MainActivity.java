@@ -1,6 +1,7 @@
 package hu.ait.karen.bkktix;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import hu.ait.karen.bkktix.adapter.HistoryRecyclerAdapter;
 import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
@@ -43,14 +46,8 @@ public class MainActivity extends AppCompatActivity
     public static final int TWENTY = 20;
     public static final int SIXTY = 60;
     public static final int ONE_HUNDRED_TWENTY = 120;
-    public static final String KEY_USERNAME = "KEY_USERNAME";
-    public static final String KEY_CREDIT_CARD_NUMBER = "KEY_CREDIT_CARD_NUMBER";
-    public static final String KEY_ADDRESS1 = "KEY_ADDRESS1";
-    public static final String KEY_CITY_STATE = "KEY_CITY_STATE";
-    public static final String KEY_COUNTRY = "KEY_COUNTRY";
     public static final String KEY_TYPE_POSITION = "KEY_TYPE_POSITION";
     public static final String KEY_NUMBER_TIX = "KEY_NUMBER_TIX";
-
 
     private FragmentManager fragmentManager;
     private MyTixFragment myTixFragment;
@@ -83,12 +80,6 @@ public class MainActivity extends AppCompatActivity
         historyRecyclerAdapter = new HistoryRecyclerAdapter(getApplicationContext());
 
 
-        historyRecyclerAdapter.addHistoricalTicket(new Ticket(TicketType._20_MINUTES));
-        historyRecyclerAdapter.addHistoricalTicket(new Ticket(TicketType._20_MINUTES));
-        historyRecyclerAdapter.addHistoricalTicket(new Ticket(TicketType._20_MINUTES));
-        historyRecyclerAdapter.addHistoricalTicket(new Ticket(TicketType._60_MINUTES));
-
-
     }
 
     private void setUpUI() {
@@ -104,6 +95,10 @@ public class MainActivity extends AppCompatActivity
 
     public MyTixExpandableListAdapter getListAdapter() {
         return listAdapter;
+    }
+
+    public HistoryRecyclerAdapter getHistoryRecyclerAdapter() {
+        return historyRecyclerAdapter;
     }
 
     public void addNewTicket(TicketType ticketType) {
@@ -279,17 +274,31 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPositiveSelected() {
 
-        ((Ticket) listAdapter.getChild(tempGroupPosition, tempChildPosition)).
-                setDateValidated(new Date(System.currentTimeMillis()));
+        final Ticket thisTicket = ((Ticket) listAdapter.getChild(tempGroupPosition, tempChildPosition));
+        thisTicket.setDateValidated(new Date(System.currentTimeMillis()));
         listAdapter.moveTicketToValidated(tempTicketType, tempGroupPosition, tempChildPosition);
-        Toast.makeText(this, R.string.ticket_validated, Toast.LENGTH_SHORT).show();
 
+        //move ticket to History when it's no longer valid
+        int minutesToExpired = getTicketTypeInteger(thisTicket.getTicketType());
+        new CountDownTimer(minutesToExpired * 60000L, 60000L) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                historyRecyclerAdapter.addHistoricalTicket(thisTicket);
+                listAdapter.removeChildOfValidated(tempGroupPosition, tempChildPosition);
+            }
+        }.start();
+
+
+        Toast.makeText(this, R.string.ticket_validated, Toast.LENGTH_SHORT).show();
         showMyTixFragment();
     }
 
     @Override
     public void onNegativeSelected() {
-        Toast.makeText(this, "Ticket validation cancelled", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.validation_cancelled, Toast.LENGTH_SHORT).show();
     }
 
     public static int getTicketTypeInteger(TicketType ticketType) {
@@ -311,13 +320,6 @@ public class MainActivity extends AppCompatActivity
         bundle.putInt(KEY_TYPE_POSITION, spinnerTicketTypePosition);
         bundle.putInt(KEY_NUMBER_TIX, numberOfTickets);
         verifyFragment.setArguments(bundle);
-
-
-//        //store ticket info here in MainActivity
-//        tempTicketType = ticketType;
-//        tempGroupPosition = groupPosition;
-//        tempChildPosition = childPosition;
-
 
         verifyFragment.show(getSupportFragmentManager(),
                 VerifyPurchaseMessageFragment.TAG);

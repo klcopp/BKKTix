@@ -6,6 +6,8 @@ public enum TicketType {
     _60_MINUTES,
     _120_MINUTES;
 
-    public static TicketType fromOrdinal(int n) {return values()[n];}
+    public static TicketType fromOrdinal(int n) {
+        return values()[n];
+    }
 
 }

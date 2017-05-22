@@ -35,7 +35,6 @@ public class VerifyPurchaseMessageFragment extends DialogFragment {
             throw new RuntimeException(
                     "This Activity is not implementing the VerifyPurchaseMessageFragmentAnswer" +
                             " interface");
-            //TODO ^STRING
         }
     }
 
@@ -47,34 +46,16 @@ public class VerifyPurchaseMessageFragment extends DialogFragment {
         final int numberOfTickets = getArguments().getInt(MainActivity.KEY_NUMBER_TIX);
         int ticketTypePosition = getArguments().getInt(MainActivity.KEY_TYPE_POSITION);
         final TicketType ticketType = TicketType.fromOrdinal(ticketTypePosition);
-        Log.d("TAG", "ticket type: " + ticketType+ ", ticket number: "+numberOfTickets);
-
-        String userName =  getArguments().getString(MainActivity.KEY_USERNAME);
-        String creditCardNumber = getArguments().getString(MainActivity.KEY_CREDIT_CARD_NUMBER);
-        String address1 = getArguments().getString(MainActivity.KEY_ADDRESS1);
-        String cityState = getArguments().getString(MainActivity.KEY_CITY_STATE);
-        String country = getArguments().getString(MainActivity.KEY_COUNTRY);
 
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 getActivity());
 
-//        LayoutInflater inflater = LayoutInflater.from(getContext());
-//        View dialogLayout = inflater.inflate(R.layout.layout_dialog,null);
-//        alertDialogBuilder.setView(dialogLayout);
-//
-//        //TODO make a thing - layout- and try to see if the thing is working
-//
-//        TextView tv2 = (TextView) dialogLayout.findViewById(R.id.textView2);
-//        tv2.setText("TV2 YO");
 
-
-        alertDialogBuilder.setTitle("Are you sure?");
-        int minutesValid =  MainActivity.getTicketTypeInteger(ticketType);
+        alertDialogBuilder.setTitle(R.string.sure);
+        int minutesValid = MainActivity.getTicketTypeInteger(ticketType);
         alertDialogBuilder.setMessage(
-                "Are you sure you want to buy " + numberOfTickets + " tickets? " +
-                        "They will be valid for " + minutesValid +" minutes.\n\n");
-//                String.format(getString(R.string.are_you_sure), minutesTillExpiration));
+                String.format(getString(R.string.sure_long), numberOfTickets, minutesValid));
 
 
         alertDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
