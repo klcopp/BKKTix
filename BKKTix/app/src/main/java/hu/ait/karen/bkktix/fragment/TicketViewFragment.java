@@ -55,7 +55,7 @@ public class TicketViewFragment extends Fragment {
         TextView tvValidatedOrNot = (TextView) getView().findViewById(R.id.tvValidatedOrNot);
         btnValidate = (Button) getView().findViewById(R.id.btnValidate);
 
-        tvDate.setText(String.format(getString(R.string.purchased_at), ticket.getDatePurchased()));
+        tvDate.setText(ticket.getDatePurchased().toString());
 
         int minutesToAdd = 20;
         String ticketTypeString = getString(R.string._20_min_tix);
@@ -79,7 +79,7 @@ public class TicketViewFragment extends Fragment {
             gcal.add(Calendar.MINUTE, minutesToAdd);
             Date validUntil = gcal.getTime();
 
-            tvValidatedOrNot.setText("Valid until: " + validUntil);
+            tvValidatedOrNot.setText(validUntil.toString());
 
             SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
             String QRData = sdf.format(validUntil);

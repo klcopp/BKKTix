@@ -2,17 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="55dip"
-    android:orientation="vertical"
-    android:background="@color/colorVeryLightPurple">
+    android:orientation="horizontal"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_gravity="center_vertical"
+        android:tint="@color/colorDarkPurple"
+        android:src="@drawable/ic_label"/>
 
     <TextView
         android:id="@+id/lblListItem"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingLeft="15dp"
         android:paddingTop="5dp"
-        android:textSize="17dip"
+        android:textSize="17sp"
+        android:layout_gravity="center_vertical"
         android:textColor="@android:color/black"
 
         android:text="text"/>

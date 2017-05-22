@@ -18,9 +18,9 @@
     <string name="history">History</string>
     <string name="validate">Validate</string>
     <string name="ticket">Ticket</string>
-    <string name="_20_min_tix">Valid for 20 minutes</string>
-    <string name="_60_min_tix">Valid for 1 hour</string>
-    <string name="_120_min_tix">Valid for 2 hours</string>
+    <string name="_20_min_tix">Valid for 20 minutes after validation.</string>
+    <string name="_60_min_tix">Valid for 1 hour after validation.</string>
+    <string name="_120_min_tix">Valid for 2 hours after validation.</string>
     <string name="empty"></string>
     <string name="purchased_at" formatted="true">Purchased: %s</string>
     <string name="not_validated">Not yet validated.</string>
