@@ -63,9 +63,9 @@
     <string name="date_used" formatted="true">Date Used: %s</string>
     <string name="date_purchased" formatted="true">Date Purchased: %s</string>
     <string name="validation_cancelled">Ticket validation cancelled</string>
-    <string name="bought_at">Bought at: %s</string>
-    <string name="integer">%d</string>
+    <string name="bought_at" formatted="true">Bought at: %s</string>
+    <string name="integer" formatted="true">%d</string>
     <string name="sure">Are you sure?</string>
-    <string name="sure_long">Are you sure you want to buy %d tickets? They will be valid for %d minutes.</string>
+    <string name="sure_long" formatted="true">Are you sure you want to buy %1$d tickets? They will be valid for %2$d minutes.</string>
     <string name="quip">Making Budapest travel easier since 2017</string>
 </resources>
