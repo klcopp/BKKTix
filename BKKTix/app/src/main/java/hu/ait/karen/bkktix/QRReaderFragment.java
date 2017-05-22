@@ -11,6 +11,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class QRReaderFragment extends Fragment {
 
     public static final int REQUEST_CODE_CAMERA_PERMISSION = 101;
     private TextView barcodeInfo;
+    private ImageView validityInfo;
 
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
@@ -44,6 +46,7 @@ public class QRReaderFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_qr_reader, container, false);
 
         barcodeInfo = (TextView) rootView.findViewById(R.id.codeInfo);
+        validityInfo = (ImageView) rootView.findViewById(R.id.ivValidity);
         preview = (CameraSourcePreview) rootView.findViewById(R.id.cameraSourcePreview);
 
         requestNeededPermission();
@@ -146,6 +149,9 @@ public class QRReaderFragment extends Fragment {
                             if (validThruDate.getTime() > new Date(System.currentTimeMillis()).getTime())
                             {
                                 validity = "VALID!";
+                                validityInfo.setImageDrawable(getResources().getDrawable(R.drawable.greencheck));
+                            } else {
+                                validityInfo.setImageDrawable(getResources().getDrawable(R.drawable.redx));
                             }
                             barcodeInfo.setText(validity);
                         }
