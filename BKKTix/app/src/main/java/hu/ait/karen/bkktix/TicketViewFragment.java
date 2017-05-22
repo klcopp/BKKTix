@@ -15,8 +15,6 @@ import android.widget.TextView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 
-import java.io.UnsupportedEncodingException;
-import java.security.GeneralSecurityException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -26,7 +24,6 @@ import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.qr.Contents;
 import hu.ait.karen.bkktix.qr.QRCodeEncoder;
 
-import static hu.ait.karen.bkktix.qr.AesCbcWithIntegrity.*;
 
 
 public class TicketViewFragment extends Fragment {
@@ -36,7 +33,6 @@ public class TicketViewFragment extends Fragment {
     private int groupPosition;
     private int childPosition;
 
-    private static String PASSWORD = "this passphrase will generate the key for a BKKTix ticket!";
 
 
     Button btnValidate;
@@ -84,8 +80,8 @@ public class TicketViewFragment extends Fragment {
 
             tvValidatedOrNot.setText("Valid until: " + validUntil);
 
-            CipherTextIvMac encryptedDate = encryptDate(validUntil);
-            QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder(encryptedDate.toString(), 500);
+            String QRData = validUntil.toString();
+            QRCodeEncoder qrCodeEncoder = makeQRCodeEncoder(QRData, 500);
             try {
                 Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
                 ivQRCode.setImageBitmap(bitmap);
@@ -108,27 +104,6 @@ public class TicketViewFragment extends Fragment {
 //        else{
 //            btnValidate.setVisibility(View.GONE);
 //        }
-    }
-
-    private CipherTextIvMac encryptDate(Date validUntil) {
-
-        CipherTextIvMac civ = null;
-
-        try {
-            SecretKeys key;
-            String salt = saltString(generateSalt());
-            key = generateKeyFromPassword(PASSWORD, salt);
-
-            String dateToEncrypt = validUntil.toString();
-
-            civ = encrypt(dateToEncrypt, key);
-
-            //String decryptedDate = decryptString(civ, key);
-            //textToEncrypt.equals(decryptedText);
-
-        } catch (GeneralSecurityException | UnsupportedEncodingException e) {}
-
-        return civ;
     }
 
     @Override

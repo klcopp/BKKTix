@@ -1,7 +1,6 @@
 package hu.ait.karen.bkktix;
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -12,7 +11,6 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,14 +18,14 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import hu.ait.karen.bkktix.camera.CameraSourcePreview;
-import hu.ait.karen.bkktix.qr.Contents;
-import hu.ait.karen.bkktix.qr.QRCodeEncoder;
 
 public class QRReaderFragment extends Fragment {
 
@@ -44,7 +42,6 @@ public class QRReaderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_qr_reader, container, false);
-        ImageView qrCode = (ImageView) rootView.findViewById(R.id.qrCode);
 
         barcodeInfo = (TextView) rootView.findViewById(R.id.codeInfo);
         preview = (CameraSourcePreview) rootView.findViewById(R.id.cameraSourcePreview);
@@ -138,9 +135,19 @@ public class QRReaderFragment extends Fragment {
                 if (barcodes.size() != 0) {
                     barcodeInfo.post(new Runnable() {    // Use the post method of the TextView
                         public void run() {
-                            barcodeInfo.setText(    // Update the TextView
-                                    barcodes.valueAt(0).displayValue
-                            );
+                            String validity = "INVALID!";
+                            Date validThruDate = null;
+                            try {
+                                SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", new Locale("us"));
+                                validThruDate = sdf.parse(barcodes.valueAt(0).displayValue);
+                            } catch (java.text.ParseException e) {
+                                e.printStackTrace();
+                            }
+                            if (validThruDate.getTime() > new Date(System.currentTimeMillis()).getTime())
+                            {
+                                validity = "VALID!";
+                            }
+                            barcodeInfo.setText(validity);
                         }
                     });
                 }
