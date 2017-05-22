@@ -10,17 +10,33 @@
 
     <hu.ait.karen.bkktix.camera.CameraSourcePreview
         android:id="@+id/cameraSourcePreview"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_width="290dp"
+        android:layout_height="0sp"
         android:layout_gravity="center"
         android:layout_weight="4"/>
 
-    <TextView
-        android:id="@+id/codeInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Read a ticket."
-        android:textSize="40dp"
-        android:layout_weight="1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/ivValidity"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/grayq"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:id="@+id/codeInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Need ticket."
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

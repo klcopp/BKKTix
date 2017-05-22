@@ -60,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberPassword"
+        android:fontFamily="sans-serif"
         android:hint="Security Code"
         android:layout_below="@+id/etCardNumber"
         android:layout_alignStart="@+id/etCardNumber"
