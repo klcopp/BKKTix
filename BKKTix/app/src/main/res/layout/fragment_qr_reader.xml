@@ -27,7 +27,8 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/grayq"
-            android:layout_margin="20dp"/>
+            android:layout_margin="20dp"
+            android:contentDescription="validity" />
 
         <TextView
             android:id="@+id/codeInfo"
