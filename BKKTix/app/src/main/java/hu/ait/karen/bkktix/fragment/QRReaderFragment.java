@@ -1,4 +1,4 @@
-package hu.ait.karen.bkktix;
+package hu.ait.karen.bkktix.fragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import hu.ait.karen.bkktix.R;
 import hu.ait.karen.bkktix.camera.CameraSourcePreview;
 
 public class QRReaderFragment extends Fragment {

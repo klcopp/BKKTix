@@ -1,4 +1,4 @@
-package hu.ait.karen.bkktix;
+package hu.ait.karen.bkktix.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 
+import hu.ait.karen.bkktix.MainActivity;
+import hu.ait.karen.bkktix.R;
 import hu.ait.karen.bkktix.data.TicketType;
 
 
@@ -34,7 +36,7 @@ public class BuyTixFragment extends Fragment {
         final NumberPicker numberPicker = (NumberPicker) rootView.findViewById(R.id.npTicketAmount);
         Button btnBuyTix = (Button) rootView.findViewById(R.id.btnBuy);
 
-        numberPicker.setMinValue(0);
+        numberPicker.setMinValue(1);
         numberPicker.setMaxValue(20);
         numberPicker.setValue(1);
 
@@ -70,7 +72,8 @@ public class BuyTixFragment extends Fragment {
 
 
 
-//
+//  Dummy button:
+
 //        Button btnBuy20Min = (Button) rootView.findViewById(R.id.btnBuy20Min);
 //        btnBuy20Min.setOnClickListener(new View.OnClickListener() {
 //            @Override

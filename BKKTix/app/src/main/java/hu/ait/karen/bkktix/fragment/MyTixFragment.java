@@ -1,4 +1,4 @@
-package hu.ait.karen.bkktix;
+package hu.ait.karen.bkktix.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import hu.ait.karen.bkktix.MainActivity;
+import hu.ait.karen.bkktix.R;
 import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
 import hu.ait.karen.bkktix.data.Ticket;
 

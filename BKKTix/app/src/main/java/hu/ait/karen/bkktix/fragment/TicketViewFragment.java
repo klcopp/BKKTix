@@ -1,4 +1,4 @@
-package hu.ait.karen.bkktix;
+package hu.ait.karen.bkktix.fragment;
 
 
 import android.graphics.Bitmap;
@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 
+import hu.ait.karen.bkktix.MainActivity;
+import hu.ait.karen.bkktix.R;
 import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.qr.Contents;
 import hu.ait.karen.bkktix.qr.QRCodeEncoder;

@@ -17,9 +17,9 @@ import android.view.View;
 
 import android.widget.Toast;
 
-import java.security.GeneralSecurityException;
 import java.util.Date;
 
+import hu.ait.karen.bkktix.adapter.HistoryRecyclerAdapter;
 import hu.ait.karen.bkktix.adapter.MyTixExpandableListAdapter;
 import hu.ait.karen.bkktix.data.Ticket;
 import hu.ait.karen.bkktix.data.TicketType;
@@ -27,6 +27,11 @@ import hu.ait.karen.bkktix.dialog.MessageFragment;
 import hu.ait.karen.bkktix.dialog.OnMessageFragmentAnswer;
 import hu.ait.karen.bkktix.dialog.VerifyPurchaseMessageFragment;
 import hu.ait.karen.bkktix.dialog.VerifyPurchaseMessageFragmentAnswer;
+import hu.ait.karen.bkktix.fragment.BuyTixFragment;
+import hu.ait.karen.bkktix.fragment.HistoryFragment;
+import hu.ait.karen.bkktix.fragment.MyTixFragment;
+import hu.ait.karen.bkktix.fragment.QRReaderFragment;
+import hu.ait.karen.bkktix.fragment.TicketViewFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -52,8 +57,10 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private String currentFragment = MyTixFragment.TAG;
     private TicketType tempTicketType;
+    private HistoryRecyclerAdapter historyRecyclerAdapter;
     private int tempGroupPosition;
     private int tempChildPosition;
+    private HistoryFragment historyFragment;
 
     public String getKeyStr() {
         return keyStr;
@@ -72,6 +79,15 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getSupportFragmentManager();
         showMyTixFragment();
         listAdapter = new MyTixExpandableListAdapter(getApplicationContext());
+        historyRecyclerAdapter = new HistoryRecyclerAdapter(getApplicationContext());
+
+
+        historyRecyclerAdapter.addHistoricalTicket(new Ticket(TicketType._20_MINUTES));
+        historyRecyclerAdapter.addHistoricalTicket(new Ticket(TicketType._20_MINUTES));
+        historyRecyclerAdapter.addHistoricalTicket(new Ticket(TicketType._20_MINUTES));
+        historyRecyclerAdapter.addHistoricalTicket(new Ticket(TicketType._60_MINUTES));
+
+
     }
 
     private void setUpUI() {
@@ -140,6 +156,11 @@ public class MainActivity extends AppCompatActivity
     private void showQRReaderFragment() {
         showFragment(new QRReaderFragment(), QRReaderFragment.TAG);
         setToolbarTitle(R.string.check);
+    }
+
+    private void showHistoryFragment(){
+        if (historyFragment == null) historyFragment = new HistoryFragment();
+        showFragment(historyFragment, HistoryFragment.TAG);
     }
 
     private void showFragment(Fragment fragment, String tag) {
@@ -217,6 +238,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_account) {
         } else if (id == R.id.nav_history) {
+            showHistoryFragment();
         } else if (id == R.id.nav_help) {
         }
 
@@ -250,19 +272,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onPositiveSelected() {
 
-        //TODO make QR code
-
-
         ((Ticket) listAdapter.getChild(tempGroupPosition, tempChildPosition)).
                 setDateValidated(new Date(System.currentTimeMillis()));
         listAdapter.moveTicketToValidated(tempTicketType, tempGroupPosition, tempChildPosition);
         Toast.makeText(this, R.string.ticket_validated, Toast.LENGTH_SHORT).show();
 
-//        showMyTixFragment();
+        showMyTixFragment();
     }
 
     @Override
     public void onNegativeSelected() {
+        Toast.makeText(this, "Ticket validation cancelled", Toast.LENGTH_SHORT).show();
     }
 
     public static int getTicketTypeInteger(TicketType ticketType) {
@@ -315,7 +335,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onPurchaseCancelledSelected() {
-
+        Toast.makeText(this, "Purchase cancelled.", Toast.LENGTH_SHORT).show();
         showMyTixFragment();
     }
 }
